@@ -657,6 +657,7 @@ footer{
         flex-wrap:wrap;
     }
 }
+/* ===== ULTRA PRO NAVBAR ===== */
 header{
 position:fixed;
 top:0;
@@ -711,6 +712,61 @@ box-shadow:0 0 15px rgba(170,120,255,0.9),
 0 0 35px rgba(170,120,255,0.5);
 transform:translateY(-6px) scale(1.2);
 }
+.btn-resume {
+    background: #4CAF50;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Hover Effect */
+.btn-resume:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    background: #45a049;
+}
+.btn-resume:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 15px #00ffd5;
+}
+.btn-resume i {
+    transition: transform 0.3s ease;
+}
+
+.btn-resume:hover i {
+    transform: translateY(3px);
+}
+.btn-touch {
+    background: #2196F3;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+	.btn-touch:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    background: #1e88e5;
+}
+.btn-touch:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 15px #00ffd5;
+}
+.btn-touch i {
+    transition: transform 0.3s ease;
+}
+
+.btn-touch:hover i {
+    transform: translateX(5px);
+}
+
 
 
 
