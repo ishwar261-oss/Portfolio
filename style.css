@@ -766,6 +766,28 @@ transform:translateY(-6px) scale(1.2);
 .btn-touch:hover i {
     transform: translateX(5px);
 }
+.footer-signature{
+    position: absolute;
+    right: 40px;      /* move to right side */
+    bottom: 85px;     /* lower position */
+
+    height: 200px;
+    width: auto;
+
+    opacity: 0.9;
+
+    /* TILT EFFECT */
+    transform: rotate(-8deg);
+
+    /* smooth look */
+    transition: 0.4s ease;
+}
+.footer-signature:hover{
+    transform: rotate(-8deg) scale(1.08);
+    filter: drop-shadow(0 0 12px cyan);
+}
+
+
 
 
 
