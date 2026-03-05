@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ishwar Anpat | Portfolio</title>
-    
+
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <!-- Your CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
 
     <!-- Particles & Custom Cursor -->
     <canvas id="particleCanvas"></canvas>
@@ -25,9 +29,9 @@
         <div class="logo">IDZz</div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
-			<li><a href="#projects">Projects</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li><a href="#skills">Skills</a></li>
-            <li><a href="#education">Education</a></li>           
+            <li><a href="#education">Education</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <button class="theme-toggle" id="theme-btn">🌙</button>
@@ -38,43 +42,58 @@
 
 
     <header class="hero">
-<div class="sky">
-    <canvas id="starsCanvas"></canvas>
-    <div class="sun"></div>
-    <div class="moon"></div>
+        <div class="sky">
+            <canvas id="starsCanvas"></canvas>
+            <div class="sun"></div>
+            <div class="moon"></div>
 
             <div class="parallax-layer layer-back">
-    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-        <path fill="#141414" d="M0,224L200,180L400,220L600,170L800,220L1000,180L1200,230L1440,200L1440,320L0,320Z"></path>
-    </svg>
-</div>
-
-<div class="parallax-layer layer-front">
-    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-        <path fill="var(--bg-color)" d="M0,250L300,200L600,260L900,210L1200,250L1440,220L1440,320L0,320Z"></path>
-    </svg>
-</div>
-
-	<div class="hero-intro-line"></div>
-        <div class="hero-content" data-aos="zoom-in"><br><br>
-            <p class="subtitle">Transforming ideas into intelligent systems through code and innovation.</p>
-            <h1>Ishwar Anpat</h1>
-            <h2 id="typing-text"></h2>
-            <p class="tagline">AI-Driven Developer | Building Tomorrow’s Technology</p>
-
-            <!-- Social Links -->
-            <div class="social-links">
-                <a href="https://github.com/ishwar261-oss/" target="_blank" class="icon-circle github">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/ishwar-anpat-761b6739b/" target="_blank" class="icon-circle linkedin">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://leetcode.com/u/Ishwar_Anpat/" target="_blank" class="icon-circle leetcode">
-                    <i class="fas fa-code"></i>
-                </a>
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#141414"
+                        d="M0,224L200,180L400,220L600,170L800,220L1000,180L1200,230L1440,200L1440,320L0,320Z"></path>
+                </svg>
             </div>
-        </div>
+
+            <div class="parallax-layer layer-front">
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="var(--bg-color)" d="M0,250L300,200L600,260L900,210L1200,250L1440,220L1440,320L0,320Z">
+                    </path>
+                </svg>
+            </div>
+
+            <div class="hero-intro-line"></div>
+            <div class="hero-content" data-aos="zoom-in"><br><br>
+                <p class="subtitle">Transforming ideas into intelligent systems through code and innovation.</p>
+                <h1>Ishwar Anpat</h1>
+                <h2 id="typing-text"></h2>
+                <p class="tagline">AI-Driven Developer | Building Tomorrow’s Technology</p>
+
+                <!-- Social Links -->
+                <div class="social-links">
+                    <a href="https://github.com/ishwar261-oss/" target="_blank" class="icon-circle github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ishwar-anpat-761b6739b/" target="_blank"
+                        class="icon-circle linkedin">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://leetcode.com/u/Ishwar_Anpat/" target="_blank" class="icon-circle leetcode">
+                        <i class="fas fa-code"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <a href="#about" class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div>
+                    <span class="m_scroll_arrows unu"></span>
+                    <span class="m_scroll_arrows doi"></span>
+                    <span class="m_scroll_arrows trei"></span>
+                </div>
+            </a>
     </header>
 
     <!-- About Section -->
@@ -89,13 +108,14 @@
                 <h2 class="about-name">Ishwar Anpat <span class="wave">👋</span></h2>
                 <h3 class="about-role">Software and AI Developer</h3>
                 <p class="about-description">
-                    I'm a passionate Bsc.CS student specializing in Software Development and Artificial Intelligence. 
-                    I focus on designing data-driven, efficient, and scalable applications that merge innovation with real-world use.
+                    I'm a passionate Bsc.CS student specializing in Software Development and Artificial Intelligence.
+                    I focus on designing data-driven, efficient, and scalable applications that merge innovation with
+                    real-world use.
                 </p>
                 <div class="about-buttons">
                     <a href="resume/Resume.pdf" download class="btn-resume">
-    		<i class="fas fa-download"></i> Resume
-		</a>
+                        <i class="fas fa-download"></i> Resume
+                    </a>
 
                     <a href="#contact" class="btn-touch">Get in Touch →</a>
                 </div>
@@ -114,10 +134,15 @@
             <!-- Project Template -->
             <div class="project-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
                 <div class="project-glow"></div>
-                <img src="project/Mohini.png" alt="Project 1" class="project-image" data-aos="slide-up-bounce" data-aos-duration="1000">
+                <img src="project/Mohini.png" alt="Project 1" class="project-image" data-aos="slide-up-bounce"
+                    data-aos-duration="1000">
                 <div class="project-content">
                     <h3>Mohini AI [CHATBOT]</h3>
-                    <p>Developed an AI-based virtual assistant designed to simulate real-time human interaction through text and voice features. Built with a focus on clean UI, event-driven architecture, and modular programming, enabling conversational responses, user interaction handling, and assistant-style automation. Demonstrates skills in software development, AI integration concepts, and interactive application design.</p>
+                    <p>Developed an AI-based virtual assistant designed to simulate real-time human interaction through
+                        text and voice features. Built with a focus on clean UI, event-driven architecture, and modular
+                        programming, enabling conversational responses, user interaction handling, and assistant-style
+                        automation. Demonstrates skills in software development, AI integration concepts, and
+                        interactive application design.</p>
                     <div class="tech-icons">
                         <i class="fab fa-java" title="Java"></i>
                         <i class="fab fa-jfx-square" title="JavaFx"></i>
@@ -133,7 +158,9 @@
                 <img src="project/idzOS.png" alt="Project 2" class="project-image">
                 <div class="project-content">
                     <h3>IDz OS</h3>
-                    <p>A Windows-style desktop operating system simulation built using C# and Windows Forms. It includes a welcome screen, lock screen, desktop UI, and interactive system components to demonstrate UI design, OOP concepts, and system workflow understanding.</p>
+                    <p>A Windows-style desktop operating system simulation built using C# and Windows Forms. It includes
+                        a welcome screen, lock screen, desktop UI, and interactive system components to demonstrate UI
+                        design, OOP concepts, and system workflow understanding.</p>
                     <div class="tech-icons">
                         <i class="fab fa-html5"></i>
                         <i class="fab fa-css3-alt"></i>
@@ -149,9 +176,9 @@
                 <img src="project/DataEnc.png" alt="Project 3" class="project-image">
                 <div class="project-content">
                     <h3>Playfair-Cipher-Encryption-System</h3>
-                    <p>A simple project that encrypts and decrypts text using the Playfair Cipher 
-						algorithm with keyword-based matrix generation, 
-						demonstrating basic cryptography and secure message transformation.</p>
+                    <p>A simple project that encrypts and decrypts text using the Playfair Cipher
+                        algorithm with keyword-based matrix generation,
+                        demonstrating basic cryptography and secure message transformation.</p>
                     <div class="tech-icons">
                         <i class="fab fa-js-square"></i>
                         <i class="fab fa-react"></i>
@@ -163,23 +190,31 @@
         </div>
     </section>
 
-<!-- Skills Section -->
-<section id="skills" data-aos="fade-up">
-    <h2 class="section-title">Technical Skills</h2>
-    <p class="section-subtitle">Here are some of the key technologies I work with</p>
+    <!-- Skills Section -->
+    <section id="skills" data-aos="fade-up">
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-subtitle">Here are some of the key technologies I work with</p>
 
-    <div class="skills-grid">
-        <div class="skill-card" data-skill="C" data-aos="fade-up" data-aos-delay="100"><i class="fab fa-cuttlefish"></i><span>C</span></div>
-        <div class="skill-card" data-skill="C++" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-code"></i><span>C++</span></div>
-        <div class="skill-card" data-skill="Java" data-aos="fade-up" data-aos-delay="300"><i class="fab fa-java"></i><span>Java</span></div>
-        <div class="skill-card" data-skill="C#" data-aos="fade-up" data-aos-delay="400"><i class="fas fa-cube"></i><span>C#</span></div>
+        <div class="skills-grid">
+            <div class="skill-card" data-skill="C" data-aos="fade-up" data-aos-delay="100"><i
+                    class="fab fa-cuttlefish"></i><span>C</span></div>
+            <div class="skill-card" data-skill="C++" data-aos="fade-up" data-aos-delay="200"><i
+                    class="fas fa-code"></i><span>C++</span></div>
+            <div class="skill-card" data-skill="Java" data-aos="fade-up" data-aos-delay="300"><i
+                    class="fab fa-java"></i><span>Java</span></div>
+            <div class="skill-card" data-skill="C#" data-aos="fade-up" data-aos-delay="400"><i
+                    class="fas fa-cube"></i><span>C#</span></div>
 
-        <div class="skill-card" data-skill="DSA" data-aos="fade-up" data-aos-delay="500"><i class="fas fa-network-wired"></i><span>DSA</span></div>
-        <div class="skill-card" data-skill="Git" data-aos="fade-up" data-aos-delay="600"><i class="fab fa-git-alt"></i><span>Git</span></div>
-        <div class="skill-card" data-skill="GitHub" data-aos="fade-up" data-aos-delay="700"><i class="fab fa-github"></i><span>GitHub</span></div>
-        <div class="skill-card" data-skill="VS Code" data-aos="fade-up" data-aos-delay="800"><i class="fas fa-laptop-code"></i><span>VS Code</span></div>
-    </div>
-</section>
+            <div class="skill-card" data-skill="DSA" data-aos="fade-up" data-aos-delay="500"><i
+                    class="fas fa-network-wired"></i><span>DSA</span></div>
+            <div class="skill-card" data-skill="Git" data-aos="fade-up" data-aos-delay="600"><i
+                    class="fab fa-git-alt"></i><span>Git</span></div>
+            <div class="skill-card" data-skill="GitHub" data-aos="fade-up" data-aos-delay="700"><i
+                    class="fab fa-github"></i><span>GitHub</span></div>
+            <div class="skill-card" data-skill="VS Code" data-aos="fade-up" data-aos-delay="800"><i
+                    class="fas fa-laptop-code"></i><span>VS Code</span></div>
+        </div>
+    </section>
 
 
 
@@ -212,83 +247,77 @@
 
     <!-- JS Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     <script src="script.js"></script>
 
-<!-- Contact / Get in Touch Section -->
-<section id="contact" data-aos="fade-up">
-    <h2 class="section-title">Get in Touch</h2>
-    <p class="section-subtitle">Feel free to reach out for collaborations or just a friendly hello</p>
+    <!-- Contact / Get in Touch Section -->
+    <section id="contact" data-aos="fade-up">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">Feel free to reach out for collaborations or just a friendly hello</p>
 
-    <div class="contact-grid">
-        <!-- Email -->
-        <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
-            <i class="fas fa-envelope"></i>
-            <h3>Email</h3>
-            <p>ishwaranpat261@gmail.com</p>
-            <a href="mailto:ishwaranpat261@gmail.com" class="btn-contact">Send Email →</a>
+        <div class="contact-grid">
+            <!-- Email -->
+            <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>ishwaranpat261@gmail.com</p>
+                <a href="mailto:ishwaranpat261@gmail.com" class="btn-contact">Send Email →</a>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fab fa-linkedin"></i>
+                <h3>LinkedIn</h3>
+                <p>Connect with me</p>
+                <a href="https://www.linkedin.com/in/ishwar-anpat-761b6739b/" target="_blank" class="btn-contact">Visit
+                    Profile →</a>
+            </div>
+
+            <!-- GitHub -->
+            <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fab fa-github"></i>
+                <h3>GitHub</h3>
+                <p>View my projects</p>
+                <a href="https://github.com/ishwar261-oss/" target="_blank" class="btn-contact">Explore →</a>
+            </div>
+
+            <!-- Start a Conversation -->
+            <div class="contact-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-comment-dots"></i>
+                <h3>Start a Conversation</h3>
+                <p>Let’s talk about ideas, projects, or just say hi!</p>
+                <a href="#contact" class="btn-contact">Say Hello →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <h3 class="footer-title">IDZz | Ishwar Anpat</h3>
+        <p class="footer-text">AI Developer • Software Engineer • Building Intelligent Systems</p>
+
+        <div class="footer-social">
+            <a href="https://github.com/ishwar261-oss/" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/ishwar-anpat-761b6739b/" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+
+            <a href="https://leetcode.com/u/Ishwar_Anpat/" target="_blank">
+                <i class="fas fa-code"></i>
+            </a>
+
+            <a href="mailto:ishwaranpat261@gmail.com">
+                <i class="fas fa-envelope"></i>
+            </a>
         </div>
 
-        <!-- LinkedIn -->
-        <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
-            <i class="fab fa-linkedin"></i>
-            <h3>LinkedIn</h3>
-            <p>Connect with me</p>
-            <a href="https://www.linkedin.com/in/ishwar-anpat-761b6739b/" target="_blank" class="btn-contact">Visit Profile →</a>
-        </div>
-
-        <!-- GitHub -->
-        <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
-            <i class="fab fa-github"></i>
-            <h3>GitHub</h3>
-            <p>View my projects</p>
-            <a href="https://github.com/ishwar261-oss/" target="_blank" class="btn-contact">Explore →</a>
-        </div>
-
-        <!-- Start a Conversation -->
-        <div class="contact-card" data-aos="fade-up" data-aos-delay="400">
-            <i class="fas fa-comment-dots"></i>
-            <h3>Start a Conversation</h3>
-            <p>Let’s talk about ideas, projects, or just say hi!</p>
-            <a href="#contact" class="btn-contact">Say Hello →</a>
-        </div>
-    </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer>
-    <h3 class="footer-title">IDZz | Ishwar Anpat</h3>
-    <p class="footer-text">AI Developer • Software Engineer • Building Intelligent Systems</p>
-
-    <div class="footer-social">
-        <a href="https://github.com/ishwar261-oss/" target="_blank">
-            <i class="fab fa-github"></i>
-        </a>
-
-        <a href="https://www.linkedin.com/in/ishwar-anpat-761b6739b/" target="_blank">
-            <i class="fab fa-linkedin"></i>
-        </a>
-
-        <a href="https://leetcode.com/u/Ishwar_Anpat/" target="_blank">
-            <i class="fas fa-code"></i>
-        </a>
-
-        <a href="mailto:ishwaranpat261@gmail.com">
-            <i class="fas fa-envelope"></i>
-        </a>
-    </div>
-
-    <p class="footer-copy">© 2026 Ishwar Anpat. All Rights Reserved.</p>
-	 <img src="Signature.png"
-         alt="Ishwar Signature"
-         class="footer-signature">
-</footer>
+        <p class="footer-copy">© 2026 Ishwar Anpat. All Rights Reserved.</p>
+        <img src="Signature.png" alt="Ishwar Signature" class="footer-signature">
+    </footer>
 
 </body>
+
 </html>
-
-
-
-
-
-
-
