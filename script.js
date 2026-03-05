@@ -309,12 +309,59 @@ typeSubtitle();
 
 
 const header = document.querySelector("header");
-window.addEventListener("scroll",()=>{
-if(window.scrollY>50){
-header.classList.add("scrolled");
-}else{
-header.classList.remove("scrolled");
-}
-});
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section');
+const scrollProgress = document.getElementById('scroll-progress');
+
+window.addEventListener("scroll", () => {
+    // Header scrolled state
+    if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
+
+    // Scroll Progress Bar
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    if (scrollProgress) {
+        scrollProgress.style.width = scrollPercent + "%";
+    }
+
+    // Active Navigation Link
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollTop >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
 });
 
+// Initialize Vanilla Tilt for 3D card effects
+if (typeof VanillaTilt !== 'undefined') {
+    VanillaTilt.init(document.querySelectorAll(".project-card"), {
+        max: 10,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.3,
+        scale: 1.02
+    });
+    VanillaTilt.init(document.querySelectorAll(".skill-card, .contact-card"), {
+        max: 15,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+        scale: 1.05
+    });
+}
+});
