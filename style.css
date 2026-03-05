@@ -5,6 +5,10 @@
     --card-bg: rgba(20, 20, 20, 0.85);
     --card-hover: rgba(124, 77, 255, 0.1);
     --hero-gradient: linear-gradient(180deg, #120b24 0%, #0a0a0a 100%);
+    --mountain-bg: #1a1a2e;
+    --mountain-mid: #16213e;
+    --mountain-fg: var(--bg-color);
+    --glow-color: rgba(124, 77, 255, 0.1);
 }
 
 [data-theme="light"] {
@@ -12,7 +16,11 @@
     --text-color: #1a1a1a;
     --card-bg: rgba(255, 255, 255, 0.85);
     --card-hover: rgba(124, 77, 255, 0.15);
-    --hero-gradient: linear-gradient(180deg, #e0d4ff 0%, #f4f4f9 100%);
+    --hero-gradient: linear-gradient(180deg, #bbd2ff 0%, #f4f4f9 100%);
+    --mountain-bg: #adc1db;
+    --mountain-mid: #cddff5;
+    --mountain-fg: var(--bg-color);
+    --glow-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Global Styles */
@@ -27,12 +35,111 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary-purple), #ff66c4);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #66ffea, var(--primary-purple));
+}
+
+/* Custom Selection */
+::selection {
+    background: rgba(124, 77, 255, 0.4);
+    color: #fff;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     overflow-x: hidden;
-    transition: 0.4s;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-color);
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.loader-logo {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-color);
+    letter-spacing: 2px;
+    animation: pulseLogo 1.5s infinite alternate;
+}
+
+.loader-bar {
+    width: 150px;
+    height: 4px;
+    background: rgba(124, 77, 255, 0.2);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background: linear-gradient(90deg, #7c4dff, #ff66c4, #66ffea);
+    animation: loadingBar 1.5s infinite ease-in-out;
+    border-radius: 4px;
+}
+
+@keyframes pulseLogo {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+        text-shadow: 0 0 10px transparent;
+    }
+
+    100% {
+        transform: scale(1.05);
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(124, 77, 255, 0.6);
+    }
+}
+
+@keyframes loadingBar {
+    0% {
+        left: -50%;
+    }
+
+    100% {
+        left: 100%;
+    }
 }
 
 /* Scroll Progress Bar */
@@ -149,6 +256,8 @@ section {
     transform: translateY(80px) scale(0.95);
     animation: heroIntro 1.2s ease forwards;
     animation-delay: 0.4s;
+    position: relative;
+    z-index: 10;
 }
 
 .hero-intro-line {
@@ -158,6 +267,8 @@ section {
     margin: 0 auto 25px auto;
     border-radius: 4px;
     animation: introLine 1s ease forwards;
+    position: relative;
+    z-index: 10;
 }
 
 @keyframes heroIntro {
@@ -280,66 +391,224 @@ section {
 }
 
 /* Sky with Sun & Moon */
-.sky {
+.celestial-wrapper {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     top: 0;
     left: 0;
-    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.celestial-container {
+    position: absolute;
+    top: 60vh;
+    left: 50%;
+    width: 900px;
+    height: 900px;
+    margin-top: -450px;
+    margin-left: -450px;
+    border-radius: 50%;
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .sun,
 .moon {
     position: absolute;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    top: 50%;
+    width: 140px;
+    height: 140px;
     left: 50%;
-    transform: translate(-50%, 50%);
-    transition: transform 1s ease, box-shadow 1s ease, opacity 1s ease;
+    border-radius: 50%;
     z-index: 1;
+    transform: translateX(-50%);
+    transition: box-shadow 1s ease, background 1s ease;
 }
 
 .sun {
-    background: #FFD93D;
-    box-shadow: 0 0 60px 20px rgba(255, 200, 50, 0.4);
-    opacity: 1;
+    top: -70px;
+    background: radial-gradient(circle at 40% 40%, #ffffff 0%, #ffeaa7 40%, #fdcb6e 100%);
+    box-shadow: 0 0 60px 15px rgba(253, 203, 110, 0.6), inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.sun-halo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 234, 167, 0.3) 0%, transparent 60%);
+    animation: pulseHalo 4s infinite alternate;
 }
 
 .moon {
-    background: #cce0ff;
-    box-shadow: 0 0 50px 15px rgba(200, 220, 255, 0.3);
-    opacity: 0;
+    bottom: -70px;
+    background: radial-gradient(circle at 30% 30%, #f1f2f6 0%, #ced6e0 100%);
+    box-shadow: 0 0 50px 10px rgba(206, 214, 224, 0.4), inset -15px -15px 25px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
 }
 
-.mountains {
+.moon-halo {
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 40%;
-    z-index: 0;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(206, 214, 224, 0.2) 0%, transparent 60%);
+    animation: pulseHalo 4s infinite alternate;
 }
 
-.mountains path {
-    transition: fill 0.6s ease;
+.crater {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.3), 1px 1px 2px rgba(255, 255, 255, 0.4);
 }
 
+.crater1 {
+    width: 30px;
+    height: 30px;
+    top: 20%;
+    left: 25%;
+}
+
+.crater2 {
+    width: 14px;
+    height: 14px;
+    top: 50%;
+    left: 65%;
+}
+
+.crater3 {
+    width: 22px;
+    height: 22px;
+    top: 65%;
+    left: 35%;
+}
+
+@keyframes pulseHalo {
+    0% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* Beautiful Mountains Update */
 .parallax-layer {
     position: absolute;
+    bottom: -50px;
+    width: 110%;
+    left: -5%;
+    transition: transform 0.2s linear;
+}
+
+.mountain-svg {
+    position: absolute;
     bottom: 0;
     width: 100%;
-    transition: transform 0.2s linear;
-    z-index: 0;
+    height: 350px;
+    display: block;
 }
 
 .layer-back {
-    opacity: 0.6;
+    z-index: 2;
+}
+
+.layer-back .mountain-svg {
+    height: 360px;
+    opacity: 1;
+    filter: drop-shadow(0 -5px 15px rgba(0, 0, 0, 0.2));
+}
+
+.layer-mid {
+    z-index: 3;
+}
+
+.layer-mid .mountain-svg {
+    height: 260px;
+    opacity: 1;
+    filter: drop-shadow(0 -5px 15px rgba(0, 0, 0, 0.2));
 }
 
 .layer-front {
+    z-index: 4;
+}
+
+.layer-front .mountain-svg {
+    height: 160px;
     opacity: 1;
+    filter: drop-shadow(0 -10px 20px var(--glow-color));
+}
+
+/* Clouds */
+.clouds {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    filter: blur(20px);
+    animation: floatCloud linear infinite;
+}
+
+.cloud-1 {
+    width: 300px;
+    height: 80px;
+    top: 20%;
+    left: -300px;
+    animation-duration: 40s;
+}
+
+.cloud-2 {
+    width: 400px;
+    height: 100px;
+    top: 40%;
+    left: -400px;
+    animation-duration: 60s;
+    animation-delay: -20s;
+}
+
+.cloud-3 {
+    width: 250px;
+    height: 70px;
+    top: 30%;
+    left: -250px;
+    animation-duration: 35s;
+    animation-delay: -10s;
+}
+
+[data-theme="light"] .cloud {
+    background: rgba(255, 255, 255, 0.8);
+    filter: blur(15px);
+}
+
+@keyframes floatCloud {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(100vw + 500px));
+    }
 }
 
 #starsCanvas {
@@ -483,6 +752,105 @@ section {
     object-fit: cover;
 }
 
+.terminal-header {
+    background: #2d2d2d;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.mac-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.mac-btns span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.mac-btns .close {
+    background: #ff5f56;
+}
+
+.mac-btns .minimize {
+    background: #ffbd2e;
+}
+
+.mac-btns .maximize {
+    background: #27c93f;
+}
+
+.terminal-title {
+    color: #999;
+    font-size: 0.85rem;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateX(-20px);
+}
+
+.terminal-body {
+    padding: 20px;
+    color: #e6e6e6;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    min-height: 250px;
+}
+
+.terminal-body p {
+    margin-bottom: 8px;
+}
+
+.prompt {
+    color: #27c93f;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.cmd {
+    color: #fff;
+}
+
+.out {
+    color: #a5d6ff;
+    margin-bottom: 15px !important;
+    margin-left: 20px;
+}
+
+.json-block {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #7c4dff;
+    white-space: pre-wrap;
+    font-family: inherit;
+    color: #d1d5da;
+}
+
+.cursor-blink {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: #fff;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
 .about-name {
     font-size: 3rem;
     font-weight: 800;
@@ -520,7 +888,7 @@ section {
     border: 1px solid var(--primary-purple);
 }
 
-/* Section Titles */
+/* Section Titles (Dynamic Typography) */
 section {
     padding: 100px 10%;
 }
@@ -528,7 +896,24 @@ section {
 .section-title {
     text-align: center;
     margin-bottom: 10px;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #7c4dff, #ff66c4, #66ffea);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradientText 5s linear infinite;
+}
+
+@keyframes gradientText {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
 }
 
 .section-subtitle {
@@ -646,6 +1031,33 @@ section {
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* Projects Section */
+.project-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 2px solid var(--primary-purple);
+    color: var(--text-color);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary-purple);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(124, 77, 255, 0.4);
 }
 
 /* Projects Grid */
@@ -859,6 +1271,54 @@ section {
 #contact {
     padding: 100px 10%;
     background: var(--bg-color);
+}
+
+/* Toast Notification */
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-purple);
+    color: var(--text-color);
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 100000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+#toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
 }
 
 .contact-grid {
