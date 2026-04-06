@@ -292,23 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     animateCursor();
 
-    // ================= MAGNETIC BUTTONS =================
-    const magneticBtns = document.querySelectorAll('.btn-resume, .btn-touch, .btn-project, .btn-contact, .theme-toggle');
 
-    magneticBtns.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-
-            // Move button slightly toward cursor
-            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
-        });
-
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = `translate(0, 0) scale(1)`;
-        });
-    });
 
     // Hover interactions
     const hoverElements = document.querySelectorAll('a, button, .skill-card, .project-card, .filter-btn');
@@ -337,21 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('mouseup', () => {
         document.body.classList.remove('cursor-click');
     });
-
-    // ================= Particles =================
-    const canvas = document.getElementById('particleCanvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-
-        function resize() {
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
-        }
-        resize();
-        addEventListener('resize', resize);
-
-        class Particle {
-            constructor() {
+         constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 2 + 1;
