@@ -503,7 +503,7 @@ nav {
     position: fixed;
     width: 100%;
     z-index: 1000;
-    backdrop-filter: blur(10px);
+    background: var(--nav-bg); /* fallback, removed backdrop-filter for performance */
 }
 
 .nav-links {
@@ -1232,8 +1232,6 @@ section {
 /* Skill Card Base */
 .skill-card {
     background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     padding: 25px;
     border-radius: 20px;
     text-align: center;
@@ -1243,38 +1241,22 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px var(--card-shadow);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     width: 100%;
     min-height: 180px;
     position: relative;
     overflow: hidden;
-    will-change: transform, opacity;
+    will-change: transform, box-shadow, opacity;
 
-    /* Clean fade-up entrance — no heavy blur filter */
+    /* Initial hidden state for animation */
     opacity: 0;
-    transform: translateY(28px) scale(0.97);
-    transition:
-        opacity 0.45s ease,
-        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 0.3s ease,
-        border-color 0.3s ease,
-        background 0.3s ease;
-    pointer-events: none;
-}
-
-/* Lightweight directional hints (JS assigns) */
-.skill-card.slide-from-right {
-    transform: translateY(28px) translateX(12px) scale(0.97);
-}
-
-.skill-card.slide-from-left {
-    transform: translateY(28px) translateX(-12px) scale(0.97);
+    transform: translateY(20px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease-out;
 }
 
 .skill-card.reveal {
     opacity: 1 !important;
-    transform: translateY(0) translateX(0) scale(1) !important;
-    pointer-events: all;
+    transform: translateY(0) scale(1) !important;
 }
 
 /* Ensure the grid doesn't clip the sliding effect */
@@ -1284,7 +1266,6 @@ section {
 
 #skills {
     overflow-x: hidden;
-    /* Prevent page horizontal scroll while cards slide in */
 }
 
 /* Skill Icon Wrapper */
@@ -1299,18 +1280,11 @@ section {
 }
 
 .skill-glow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
-    opacity: 0.4;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    z-index: 1;
+    display: none; /* Removed heavy glow animation for performance */
 }
 
 .skill-card i {
-    font-size: 3rem;
+    font-size: 3.5rem;
     position: relative;
     z-index: 2;
     transition: transform 0.3s ease;
@@ -1325,105 +1299,19 @@ section {
     transition: color 0.3s ease;
 }
 
-/* Hover Effect — Enhanced with shake & bounce */
+/* Refined Hover Animation Requested by User */
 .skill-card:hover {
-    transform: translateY(-12px) scale(1.05) !important;
-    box-shadow:
-        0 15px 40px var(--card-glow),
-        0 0 30px rgba(124, 77, 255, 0.15),
-        inset 0 0 30px rgba(124, 77, 255, 0.03);
-    border-color: var(--primary-purple);
-    background: var(--card-hover-bg);
-}
-
-.skill-card:hover .skill-glow {
-    transform: scale(1.6);
-    opacity: 0.85;
-    animation: glowPulse 1.5s ease-in-out infinite;
+    transform: translateY(-8px) scale(1.05) !important;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+    cursor: pointer;
 }
 
 .skill-card:hover i {
-    animation: iconShake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-    transform: scale(1.15);
+    transform: translateY(-3px) scale(1.1);
 }
 
 .skill-card:hover span {
     color: var(--primary-purple);
-    animation: textBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-    animation-delay: 0.1s;
-}
-
-/* Icon Shake Keyframes */
-@keyframes iconShake {
-    0% {
-        transform: scale(1.15) translate(0, 0) rotate(0);
-    }
-
-    15% {
-        transform: scale(1.15) translate(-3px, -2px) rotate(-5deg);
-    }
-
-    30% {
-        transform: scale(1.15) translate(3px, 1px) rotate(4deg);
-    }
-
-    45% {
-        transform: scale(1.15) translate(-2px, 2px) rotate(-3deg);
-    }
-
-    60% {
-        transform: scale(1.15) translate(2px, -1px) rotate(3deg);
-    }
-
-    75% {
-        transform: scale(1.15) translate(-1px, 1px) rotate(-2deg);
-    }
-
-    90% {
-        transform: scale(1.15) translate(1px, -1px) rotate(1deg);
-    }
-
-    100% {
-        transform: scale(1.15) translate(0, 0) rotate(0);
-    }
-}
-
-/* Text Bounce Keyframes */
-@keyframes textBounce {
-    0% {
-        transform: scale(1) translateY(0);
-    }
-
-    30% {
-        transform: scale(1.15) translateY(-4px);
-    }
-
-    50% {
-        transform: scale(0.95) translateY(2px);
-    }
-
-    70% {
-        transform: scale(1.08) translateY(-1px);
-    }
-
-    100% {
-        transform: scale(1) translateY(0);
-    }
-}
-
-/* Glow Pulse on Hover */
-@keyframes glowPulse {
-
-    0%,
-    100% {
-        opacity: 0.6;
-        transform: scale(1.4);
-    }
-
-    50% {
-        opacity: 0.95;
-        transform: scale(1.7);
-    }
 }
 
 /* Dark theme compatibility */
@@ -1525,20 +1413,22 @@ section {
 
 .project-card {
     background: var(--card-bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     border-radius: 20px;
     border: 1px solid var(--card-border);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
     position: relative;
     box-shadow: 0 8px 32px 0 var(--card-shadow);
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .project-card:hover {
-    transform: translateY(-15px);
-    border-color: var(--primary-purple);
-    box-shadow: 0 30px 60px rgba(124, 77, 255, 0.2);
+    transform: translateY(-10px) scale(1.03) rotateX(2deg) rotateY(-2deg);
+    border-color: rgba(124, 77, 255, 0.6);
+    box-shadow: 
+        -10px 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 25px rgba(124, 77, 255, 0.3);
 }
 
 .project-image-wrapper {
@@ -1552,11 +1442,11 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .project-card:hover .project-image {
-    transform: scale(1.15);
+    transform: scale(1.1);
 }
 
 .project-overlay {
