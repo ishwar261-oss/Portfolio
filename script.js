@@ -747,38 +747,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const skillCards = document.querySelectorAll('.skill-card');
     const skillsGrid = document.querySelector('.skills-grid');
 
-    function assignSkillDirections() {
-        if (!skillsGrid || !skillCards.length) return;
-        const cols = getComputedStyle(skillsGrid)
-            .getPropertyValue('grid-template-columns')
-            .split(/\s+/).filter(Boolean).length || 1;
-
-        skillCards.forEach((c, i) => {
-            c.classList.remove('slide-from-right', 'slide-from-left');
-            c.classList.add(Math.floor(i / cols) % 2 === 0 ? 'slide-from-right' : 'slide-from-left');
+    function assignSkillScatter() {
+        if (!skillCards.length) return;
+        
+        skillCards.forEach((c) => {
+            // Generate a random position outside the viewport
+            // Angle between 0 and 360 degrees
+            const angle = Math.random() * Math.PI * 2;
+            // Distance between 60vw and 150vw away
+            const distance = 60 + Math.random() * 90; 
+            const randomX = Math.cos(angle) * distance;
+            const randomY = Math.sin(angle) * distance;
+            // Random rotation between -360 and 360 degrees
+            const randomRot = (Math.random() - 0.5) * 720; 
+            // Random scale down
+            const randomScale = Math.random() * 0.4 + 0.2; 
+            
+            c.style.setProperty('--start-x', `${randomX}vw`);
+            c.style.setProperty('--start-y', `${randomY}vh`);
+            c.style.setProperty('--start-rot', `${randomRot}deg`);
+            c.style.setProperty('--start-scale', randomScale);
+            
+            // Random duration between 1.2s and 2.2s for a varied "flying in" effect
+            const duration = 1.2 + Math.random() * 1.0;
+            c.style.setProperty('--fly-duration', `${duration}s`);
         });
     }
-    assignSkillDirections();
-    window.addEventListener('resize', assignSkillDirections, { passive: true });
+    assignSkillScatter();
 
-    new IntersectionObserver((entries) => {
-        let n = 0;
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                setTimeout(() => entry.target.classList.add('reveal'), n++ * 45);
-            } else {
-                entry.target.classList.remove('reveal');
-            }
-        });
-    }, { threshold: 0.12 }).observe(skillsGrid || document.body);
+    // Re-calculate on resize just in case
+    window.addEventListener('resize', assignSkillScatter, { passive: true });
 
-    // Observe each card individually for the stagger
-    skillCards.forEach(card => {
+    // Observe the grid container to trigger all cards when the section comes into view
+    if (skillsGrid) {
         new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) entries[0].target.classList.add('reveal');
-            else entries[0].target.classList.remove('reveal');
-        }, { threshold: 0.12 }).observe(card);
-    });
+            if (entries[0].isIntersecting) {
+                // Add reveal class to all cards when grid is in view
+                skillCards.forEach((card, index) => {
+                    // Small stagger based on index for organic feel
+                    setTimeout(() => {
+                        card.classList.add('reveal');
+                    }, index * 30);
+                });
+            } else {
+                // Reset when out of view so it can animate again
+                skillCards.forEach(card => card.classList.remove('reveal'));
+            }
+        }, { threshold: 0.1 }).observe(skillsGrid);
+    }
 
     // Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
     //  PROJECT FILTERING
