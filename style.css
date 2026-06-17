@@ -4097,3 +4097,54 @@ nav.scrolled {
     }
 }
 
+/* ================= SKILL CARD SCATTER & ASSEMBLE ANIMATION ================= */
+
+/* Initial scattered state */
+.skill-card {
+    /* Set default fallbacks in case JS is slow */
+    --start-x: 0vw;
+    --start-y: 50vh;
+    --start-rot: 0deg;
+    --start-scale: 0.5;
+    --fly-duration: 1.5s;
+    
+    opacity: 0;
+    /* We don't apply transform here, we let the animation handle it */
+    will-change: transform, opacity;
+}
+
+/* Assembled state when revealed */
+.skill-card.reveal {
+    /* We use an animation so it doesn't conflict with hover transitions */
+    animation: 
+        skillCardFlyIn var(--fly-duration) cubic-bezier(0.2, 1, 0.3, 1) forwards,
+        skillCardLandingPulse 0.8s ease-out calc(var(--fly-duration) - 0.2s) forwards;
+}
+
+@keyframes skillCardFlyIn {
+    0% {
+        opacity: 0;
+        transform: translate(var(--start-x), var(--start-y)) rotate(var(--start-rot)) scale(var(--start-scale));
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+}
+
+/* Optional glow upon landing */
+@keyframes skillCardLandingPulse {
+    0% { box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    50% { box-shadow: 0 0 25px rgba(124, 77, 255, 0.35), 0 0 40px rgba(124, 77, 255, 0.1); }
+    100% { box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+}
+
+/* Make sure the icons inside also pop when landing */
+.skill-card i {
+    transform: scale(0.5);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.skill-card.reveal i {
+    transform: scale(1);
+}
