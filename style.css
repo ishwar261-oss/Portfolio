@@ -407,7 +407,7 @@ body {
     opacity: 0.4 !important;
 }
 
-/* Custom Cursor — uses transform, NOT left/top, for zero layout reflow */
+/* Custom Cursor â€” uses transform, NOT left/top, for zero layout reflow */
 .cursor-dot {
     width: 10px;
     height: 10px;
@@ -533,7 +533,7 @@ nav.scrolled {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* ── Glass Pill Nav ── */
+/* â”€â”€ Glass Pill Nav â”€â”€ */
 .nav-pill {
     position: absolute;
     left: 50%;
@@ -1572,7 +1572,7 @@ section {
 .icon-circle:nth-child(2) { z-index: 2; }
 .icon-circle:nth-child(3) { z-index: 3; }
 
-/* Hero Content Styles — No Box, Clean Floating */
+/* Hero Content Styles â€” No Box, Clean Floating */
 .hero-content {
     text-align: center;
     max-width: 900px;
@@ -1613,7 +1613,7 @@ section {
     fill: url(#frontGrad);
 }
 
-/* ── Hero Name — always white ── */
+/* â”€â”€ Hero Name â€” always white â”€â”€ */
 .hero-name {
     font-size: clamp(3rem, 10vw, 6rem);
     font-weight: 900;
@@ -2354,7 +2354,7 @@ header.scrolled {
     position: absolute;
     right: 60px;
     bottom: 80px;
-    height: 90px;   /* was 160px — 2MB image rendered small = no perceived loss */
+    height: 90px;   /* was 160px â€” 2MB image rendered small = no perceived loss */
     max-width: 160px;
     width: auto;
     opacity: 0.75;
@@ -3049,7 +3049,7 @@ header.scrolled {
 
 /* ================= SKILL CARD PREMIUM VISUALS ================= */
 
-/* Soft gradient overlay on hover — replaces heavy conic animation */
+/* Soft gradient overlay on hover â€” replaces heavy conic animation */
 .skill-card::before {
     content: '';
     position: absolute;
@@ -3069,7 +3069,7 @@ header.scrolled {
     opacity: 1;
 }
 
-/* Subtle top sheen on hover — replaces heavy sweep animation */
+/* Subtle top sheen on hover â€” replaces heavy sweep animation */
 .skill-card::after {
     content: '';
     position: absolute;
@@ -3093,7 +3093,7 @@ header.scrolled {
     opacity: 1;
 }
 
-/* Icon animation is now scroll-driven — no constant repaint loop */
+/* Icon animation is now scroll-driven â€” no constant repaint loop */
 
 .skill-card:hover i {
     animation: iconShake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both !important;
@@ -3170,7 +3170,7 @@ header.scrolled {
     transform-origin: center;
 }
 
-/* Hamburger → X animation */
+/* Hamburger â†’ X animation */
 .hamburger.active .line-1 {
     transform: translateY(7px) rotate(45deg);
     background: var(--primary-purple);
@@ -3356,7 +3356,7 @@ header.scrolled {
     }
 }
 
-/* Timeline Badge — glow animation when revealed */
+/* Timeline Badge â€” glow animation when revealed */
 .timeline-badge {
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
@@ -3383,7 +3383,7 @@ header.scrolled {
     }
 }
 
-/* Timeline Item — slide in animation */
+/* Timeline Item â€” slide in animation */
 .timeline-item {
     opacity: 0;
     transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -3423,7 +3423,7 @@ header.scrolled {
     }
 }
 
-/* ================= THEME TOGGLE BUTTON — ICON ONLY PILL ================= */
+/* ================= THEME TOGGLE BUTTON â€” ICON ONLY PILL ================= */
 .theme-toggle {
     display: inline-flex;
     align-items: center;
@@ -3686,9 +3686,9 @@ header.scrolled {
     border-bottom: 1px solid rgba(124, 77, 255, 0.1);
 }
 
-/* ═══════════════════════════════════════════════════
-   TOUCH / MOBILE — restore native cursor
-═══════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   TOUCH / MOBILE â€” restore native cursor
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 @media (pointer: coarse) {
     * {
         cursor: auto !important;
@@ -3700,17 +3700,17 @@ header.scrolled {
     }
 }
 
-/* ═══════════════════════════════════════════════════
-   SKILL CARD — reduced backdrop-filter for perf
-═══════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SKILL CARD â€” reduced backdrop-filter for perf
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .skill-card {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    AVATAR PLACEHOLDER (no photo mode)
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .blob-shape {
     position: relative;
     display: flex;
@@ -3794,9 +3794,9 @@ header.scrolled {
     100% { transform: scale(1.1); opacity: 0; }
 }
 
-/* ═══════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SMOOTH SCROLL ENHANCEMENTS
-═══════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 90px;
@@ -3812,9 +3812,9 @@ section[data-aos] {
     transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 }
 
-/* ═══════════════════════════════════════════════════
-   CONTACT FORM — better focus states
-═══════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CONTACT FORM â€” better focus states
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .contact-form-wrapper input:focus,
 .contact-form-wrapper textarea:focus,
 .contact-form-wrapper select:focus {
@@ -3909,7 +3909,7 @@ footer { padding: 100px 8% 150px 8%; text-align: center; background: var(--bg-co
 .footer-signature:hover { opacity: 1; transform: rotate(-8deg) scale(1.15); filter: invert(var(--dark-mode-invert, 0)) drop-shadow(0 0 25px var(--primary-purple)); animation-play-state: paused; }
 
 
-/* EDUCATION � REFERENCE STYLE TIMELINE */
+/* EDUCATION ï¿½ REFERENCE STYLE TIMELINE */
 #education { padding: 100px 8%; position: relative; overflow: hidden; }
 .edu-timeline { position: relative; max-width: 900px; margin: 60px auto 0; padding: 0 0 60px; }
 .edu-line { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 2px; background: var(--card-border); z-index: 0; }
