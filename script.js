@@ -783,8 +783,8 @@ document.addEventListener("DOMContentLoaded", () => {
         t = Math.max(0, Math.min(1, t));
 
         const isMobile = window.innerWidth < 768;
-        const c = isMobile ? -150 : -700;
-        const d = isMobile ? 200 : 400;
+        const c = isMobile ? -50 : -200;
+        const d = isMobile ? 80 : 150;
 
         function interpolate(val, inArr, outArr) {
             if (val <= inArr[0]) return outArr[0];
@@ -852,7 +852,7 @@ document.addEventListener("DOMContentLoaded", () => {
         VanillaTilt.init(document.querySelectorAll('.project-card'), {
             max: 8, speed: 500, glare: true, 'max-glare': 0.2, scale: 1.02
         });
-        VanillaTilt.init(document.querySelectorAll('.skill-card, .contact-card'), {
+        VanillaTilt.init(document.querySelectorAll('.contact-card'), {
             max: 12, speed: 500, glare: true, 'max-glare': 0.15, scale: 1.04
         });
     }
