@@ -116,19 +116,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const dot = document.querySelector('.cursor-dot');
     const outline = document.querySelector('.cursor-outline');
     const butterfly = document.getElementById('butterfly-cursor');
+    const cursorText = document.querySelector('.cursor-text');
+    const trailContainer = document.getElementById('cursorTrailContainer');
 
-    if (!isTouchDevice && dot && outline && !prefersReducedMotion) {
+    let cursorInitialized = false;
+
+    function initButterflyCursor() {
+        if (cursorInitialized || !dot || !outline) return;
+        cursorInitialized = true;
         document.documentElement.classList.add('butterfly-cursor-ready');
         if (butterfly) butterfly.classList.add('is-visible');
 
-        const trailContainer = document.getElementById('cursorTrailContainer');
         let lastTrailTime = 0;
 
         function spawnButterflySparkle(x, y, speed) {
             if (!trailContainer || speed < 1.4) return;
 
             const now = performance.now();
-            if (now - lastTrailTime < 42) return;
+            if (now - lastTrailTime < 40) return;
             lastTrailTime = now;
 
             const sparkle = document.createElement('span');
@@ -136,13 +141,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const driftX = (Math.random() - 0.5) * 46;
             const driftY = 24 + Math.random() * 38;
             const colors = [
-                'rgba(255, 222, 139, 0.9)',
-                'rgba(255, 126, 210, 0.82)',
-                'rgba(117, 216, 255, 0.82)',
-                'rgba(188, 128, 255, 0.86)'
+                'rgba(255, 222, 139, 0.95)',
+                'rgba(255, 126, 210, 0.9)',
+                'rgba(117, 216, 255, 0.9)',
+                'rgba(188, 128, 255, 0.95)'
             ];
 
-            sparkle.className = `cursor-trail-particle${Math.random() > 0.62 ? ' is-sparkle' : ''}`;
+            sparkle.className = `cursor-trail-particle${Math.random() > 0.6 ? ' is-sparkle' : ''}`;
             sparkle.style.setProperty('--particle-size', `${size}px`);
             sparkle.style.setProperty('--particle-color', colors[Math.floor(Math.random() * colors.length)]);
             sparkle.style.left = `${x}px`;
@@ -155,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
             sparkle.addEventListener('animationend', () => sparkle.remove(), { once: true });
         }
 
-        // Use CSS custom props + transform â€” zero layout reflow
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
         let dotX = mouseX, dotY = mouseY;
@@ -178,24 +182,23 @@ document.addEventListener("DOMContentLoaded", () => {
             dotY += (mouseY - dotY) * DOT_LERP;
             outX += (mouseX - outX) * OUT_LERP;
             outY += (mouseY - outY) * OUT_LERP;
-            butterflyX += (mouseX - butterflyX) * 0.13;
-            butterflyY += (mouseY - butterflyY) * 0.13;
+            butterflyX += (mouseX - butterflyX) * 0.14;
+            butterflyY += (mouseY - butterflyY) * 0.14;
 
-            // Using translate3d for GPU acceleration
-            dot.style.transform = `translate3d(${dotX - 5}px, ${dotY - 5}px, 0)`;
-            outline.style.transform = `translate3d(${outX - 23}px, ${outY - 23}px, 0)`;
+            dot.style.transform = `translate3d(${dotX - 4}px, ${dotY - 4}px, 0)`;
+            outline.style.transform = `translate3d(${outX - 22}px, ${outY - 22}px, 0)`;
             if (butterfly) {
                 const dx = butterflyX - lastButterflyX;
                 const dy = butterflyY - lastButterflyY;
                 const speed = Math.hypot(dx, dy);
-                const tilt = Math.max(-26, Math.min(26, dx * 1.35));
+                const tilt = Math.max(-28, Math.min(28, dx * 1.4));
                 const bob = Math.sin(performance.now() * 0.006) * 4;
-                const scale = 0.96 + Math.min(speed * 0.012, 0.12);
+                const scale = 0.96 + Math.min(speed * 0.012, 0.14);
 
-                butterfly.style.transform = `translate3d(${butterflyX - 27}px, ${butterflyY - 50 + bob}px, 0) rotate(${tilt}deg) scale(${scale})`;
+                butterfly.style.transform = `translate3d(${butterflyX - 27}px, ${butterflyY - 48 + bob}px, 0) rotate(${tilt}deg) scale(${scale})`;
                 wingSpeed = wingSpeed * 0.82 + speed * 0.18;
-                butterfly.classList.toggle('is-fast', wingSpeed > 4.5);
-                spawnButterflySparkle(butterflyX, butterflyY - 8, speed);
+                butterfly.classList.toggle('is-fast', wingSpeed > 4.2);
+                spawnButterflySparkle(butterflyX, butterflyY - 6, speed);
 
                 lastButterflyX = butterflyX;
                 lastButterflyY = butterflyY;
@@ -204,15 +207,15 @@ document.addEventListener("DOMContentLoaded", () => {
             requestAnimationFrame(animateCursor);
         }
         animateCursor();
+    }
 
-        // Remove fixed positioning fallback (now using transform)
-        dot.style.left = '0';
-        dot.style.top = '0';
-        outline.style.left = '0';
-        outline.style.top = '0';
+    if (dot && outline && !prefersReducedMotion) {
+        window.addEventListener('mousemove', initButterflyCursor, { once: true, passive: true });
+        if (!isTouchDevice) {
+            initButterflyCursor();
+        }
 
         // Hover state
-        const cursorText = document.querySelector('.cursor-text');
         const hoverEls = document.querySelectorAll('a, button, .skill-card, .project-card, .filter-btn');
         hoverEls.forEach(el => {
             el.addEventListener('mouseenter', () => {
@@ -244,7 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (dot) dot.style.display = 'none';
         if (outline) outline.style.display = 'none';
         if (butterfly) butterfly.style.display = 'none';
-        const trailContainer = document.getElementById('cursorTrailContainer');
         if (trailContainer) trailContainer.style.display = 'none';
         // Restore native cursor on touch
         document.documentElement.style.setProperty('cursor', 'auto');
@@ -740,7 +742,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Active nav link & Timeline
         updateActiveLink(sy);
         updateTimeline();
-        if (typeof window.updateSkillScroll === 'function') window.updateSkillScroll();
     }
 
     function updateActiveLink(sy) {
@@ -873,96 +874,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
     //  SKILL CARDS â€” DIRECTIONAL REVEAL
     // Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+    // ════════════════════════════════════════════════════════════
+    //  SKILL CARDS — REVEAL & HOVER SPOTLIGHT
+    // ════════════════════════════════════════════════════════════
     const skillCards = document.querySelectorAll('.skill-card');
-    const skillsSection = document.getElementById('skills');
-    const skillsGrid = document.querySelector('.skills-grid');
-
-    if (skillsSection) {
-        skillsSection.style.perspective = '1000px';
-        skillsSection.style.transformStyle = 'preserve-3d';
-    }
-
-    function assignSkillRows() {
-        if (!skillCards.length) return;
-        const rowsMap = new Map();
-        skillCards.forEach(c => {
-            const top = c.offsetTop;
-            if (!rowsMap.has(top)) rowsMap.set(top, []);
-            rowsMap.get(top).push(c);
+    if (skillCards.length) {
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('skill-card-visible');
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
         });
-        const sortedTops = Array.from(rowsMap.keys()).sort((a, b) => a - b);
-        sortedTops.forEach((top, index) => {
-            const dir = (index % 2 === 0) ? 1 : -1;
-            rowsMap.get(top).forEach((c, cardIndex) => {
-                c.dataset.rowDir = dir;
-                c.style.setProperty('--skill-delay', `${Math.min((index * 90) + (cardIndex * 45), 420)}ms`);
+
+        skillCards.forEach((card, index) => {
+            card.style.transitionDelay = `${(index % 6) * 60}ms`;
+            skillObserver.observe(card);
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mx', `${x}px`);
+                card.style.setProperty('--my', `${y}px`);
             });
         });
-    }
-
-    window.updateSkillScroll = function () {
-        if (!skillsSection || !skillsGrid || !skillCards.length) return;
-
-        const rect = skillsSection.getBoundingClientRect();
-        const vh = window.innerHeight;
-
-        // Scroll progress: t = 0 when section enters from bottom, t = 1 when section leaves top
-        const start = vh;
-        const end = -rect.height;
-        let t = (rect.top - start) / (end - start);
-        t = Math.max(0, Math.min(1, t));
-
-        const isMobile = window.innerWidth < 768;
-        const c = isMobile ? -50 : -200;
-        const d = isMobile ? 80 : 150;
-
-        function interpolate(val, inArr, outArr) {
-            if (val <= inArr[0]) return outArr[0];
-            if (val >= inArr[inArr.length - 1]) return outArr[outArr.length - 1];
-            for (let i = 0; i < inArr.length - 1; i++) {
-                if (val >= inArr[i] && val <= inArr[i + 1]) {
-                    const pct = (val - inArr[i]) / (inArr[i + 1] - inArr[i]);
-                    return outArr[i] + pct * (outArr[i + 1] - outArr[i]);
-                }
-            }
-            return outArr[0];
-        }
-
-        const m = interpolate(t, [0, 1], [0, d]);
-        const rotateX = interpolate(t, [0, 0.2, 0.8, 1], [15, 0, 0, 15]);
-        const rotateZ = interpolate(t, [0, 0.2, 0.8, 1], [20, 0, 0, 20]);
-        const translateY = interpolate(t, [0, 0.2, 0.8, 1], [c, 0, 0, c]);
-        const opacity = interpolate(t, [0, 0.2, 0.8, 1], [0.6, 1, 1, 0.6]);
-
-        skillsGrid.style.transform = `translateY(${translateY}px) rotateX(${rotateX}deg) rotateZ(${rotateZ}deg)`;
-        skillsGrid.style.opacity = opacity;
-
-        skillCards.forEach(card => {
-            const dir = parseInt(card.dataset.rowDir || 1);
-            card.style.setProperty('--scroll-x', `${dir * m}px`);
-            card.style.transform = '';
-        });
-    };
-
-    assignSkillRows();
-    window.addEventListener('resize', assignSkillRows, { passive: true });
-
-    if (skillCards.length) {
-        if (prefersReducedMotion) {
-            skillCards.forEach(card => card.classList.add('skill-card-visible'));
-        } else {
-            const skillRevealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('skill-card-visible');
-                        window.setTimeout(() => entry.target.style.setProperty('--skill-delay', '0ms'), 850);
-                        skillRevealObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
-
-            skillCards.forEach(card => skillRevealObserver.observe(card));
-        }
     }
 
     // Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â Ã¢â€¢Â 
@@ -1064,14 +1004,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
     //  THEME TOGGLE
     // Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
     const themeBtn = document.getElementById('theme-btn');
     const themeOverlay = document.getElementById('themeOverlay');
 
     if (themeBtn) {
         const themeIcon = themeBtn.querySelector('.theme-icon');
+        if (themeIcon) {
+            themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        }
 
         themeBtn.addEventListener('click', () => {
-            const curr = document.documentElement.getAttribute('data-theme');
+            const curr = document.documentElement.getAttribute('data-theme') || 'light';
             const next = curr === 'dark' ? 'light' : 'dark';
 
             if (themeOverlay) themeOverlay.className = `theme-transition-overlay active to-${next}`;
@@ -1247,12 +1193,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ═══════════════════════════════════════════════════════════════
-    //  CODING ACTIVITY — GitHub & LeetCode (Lazy-loaded)
+    // ═══════════════════════════════════════════════════════════════
+    //  CODING ACTIVITY — GitHub, LeetCode, Codeforces & GeeksforGeeks
     // ═══════════════════════════════════════════════════════════════
 
     const GH_USER = 'ishwar261-oss';
     const LC_USER = 'Ishwar_Anpat';
     const CF_USER = 'ishwaranpat261-oss';
+    const GFG_USER = 'ishwaranmrt0';
     let activityLoaded = false;
 
     const secretSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -1295,6 +1243,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     fetchGitHubData();
                     fetchLeetCodeData();
                     fetchCodeforcesData();
+                    fetchGFGData();
                 }
             } catch (err) {
                 console.warn('[Portfolio] Repo reveal fetch error:', err);
@@ -1309,15 +1258,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }, { once: true });
     }
 
-    // ── Trigger on first scroll into view ────────────────────────
+    // ── Load live coding activity stats immediately on startup ──
+    function initAllActivityData() {
+        if (activityLoaded) return;
+        activityLoaded = true;
+        fetchGitHubData();
+        fetchLeetCodeData();
+        fetchCodeforcesData();
+        fetchGFGData();
+    }
+
+    initAllActivityData();
+
     const activitySection = document.getElementById('activity');
     if (activitySection) {
         const actObserver = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && !activityLoaded) {
-                activityLoaded = true;
+            if (entries[0].isIntersecting) {
                 fetchGitHubData();
                 fetchLeetCodeData();
                 fetchCodeforcesData();
+                fetchGFGData();
                 actObserver.disconnect();
             }
         }, { rootMargin: '300px 0px', threshold: 0 });
@@ -1963,6 +1923,107 @@ document.addEventListener("DOMContentLoaded", () => {
 
             weakSeg.style.strokeDasharray = `${CIRC - fillLen} ${CIRC}`;
             weakSeg.style.strokeDashoffset = `${-fillLen}`;
+        });
+    }
+
+    // ════════════════════════════════════════════════════════════
+    //  GEEKSFORGEEKS
+    // ════════════════════════════════════════════════════════════
+    async function fetchGFGData() {
+        try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 8000);
+            const res = await fetch(`https://gfgstatscard.vercel.app/${GFG_USER}?raw=true`, { signal: controller.signal });
+            clearTimeout(timeout);
+            
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            renderGFGStats(data);
+        } catch (err) {
+            console.warn('[Portfolio] GFG fetch notice (using fallback profile data):', err.message);
+            // Fallback to verified profile data
+            renderGFGStats({
+                School: 0,
+                Basic: 48,
+                Easy: 42,
+                Medium: 12,
+                Hard: 0,
+                total_problems_solved: 102,
+                pod_solved_current_streak: 12,
+                pod_solved_longest_streak: 12
+            });
+        }
+    }
+
+    function renderGFGStats(d) {
+        const school = d?.School || 0;
+        const basic = d?.Basic || 48;
+        const easy = d?.Easy || 42;
+        const medium = d?.Medium || 12;
+        const hard = d?.Hard || 0;
+        const total = d?.total_problems_solved || (school + basic + easy + medium + hard);
+        const streak = d?.pod_solved_current_streak || d?.pod_solved_longest_streak || 12;
+
+        // Score / Total Solved
+        const scoreEl = document.getElementById('gfgScore');
+        if (scoreEl) {
+            scoreEl.textContent = '0';
+            animateValue(scoreEl, total, 900);
+        }
+
+        const solvedEl = document.getElementById('gfgSolved');
+        if (solvedEl) {
+            solvedEl.textContent = '0';
+            animateValue(solvedEl, total, 900);
+        }
+
+        // Streak
+        const streakEl = document.getElementById('gfgStreak');
+        if (streakEl) streakEl.textContent = `${streak}d`;
+
+        // Rank
+        const rankEl = document.getElementById('gfgRank');
+        if (rankEl) rankEl.textContent = 'Active';
+
+        // Breakdown counts
+        const schoolCountEl = document.getElementById('gfgSchoolCount');
+        if (schoolCountEl) { schoolCountEl.textContent = '0'; animateValue(schoolCountEl, school, 700); }
+
+        const basicCountEl = document.getElementById('gfgBasicCount');
+        if (basicCountEl) { basicCountEl.textContent = '0'; animateValue(basicCountEl, basic, 700); }
+
+        const easyCountEl = document.getElementById('gfgEasyCount');
+        if (easyCountEl) { easyCountEl.textContent = '0'; animateValue(easyCountEl, easy, 700); }
+
+        const mediumCountEl = document.getElementById('gfgMediumCount');
+        if (mediumCountEl) { mediumCountEl.textContent = '0'; animateValue(mediumCountEl, medium, 700); }
+
+        // Progress fills
+        const maxVal = Math.max(total, 50);
+        setTimeout(() => {
+            const schoolFill = document.getElementById('gfgSchoolFill');
+            const basicFill = document.getElementById('gfgBasicFill');
+            const easyFill = document.getElementById('gfgEasyFill');
+            const medFill = document.getElementById('gfgMediumFill');
+            if (schoolFill) schoolFill.style.width = `${Math.min(100, (school / maxVal) * 100)}%`;
+            if (basicFill) basicFill.style.width = `${Math.min(100, (basic / maxVal) * 100)}%`;
+            if (easyFill) easyFill.style.width = `${Math.min(100, (easy / maxVal) * 100)}%`;
+            if (medFill) medFill.style.width = `${Math.min(100, (medium / maxVal) * 100)}%`;
+        }, 250);
+
+        // Donut gauge animation
+        animateGfgDonut(total);
+    }
+
+    function animateGfgDonut(total) {
+        const CIRC = 2 * Math.PI * 45; // ≈ 282.74
+        const targetLen = Math.min(CIRC, Math.max(20, (total / 150) * CIRC));
+        const seg = document.getElementById('gfgScoreSeg');
+        if (!seg) return;
+
+        requestAnimationFrame(() => {
+            seg.style.strokeDasharray = `${targetLen} ${CIRC}`;
+            seg.style.strokeDashoffset = '0';
         });
     }
 

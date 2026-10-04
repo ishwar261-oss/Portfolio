@@ -26,7 +26,7 @@
     <meta name="twitter:title" content="Ishwar Anpat | AI & Software Developer">
     <meta name="twitter:image"
         content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
-
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -50,7 +50,8 @@
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         media="print" onload="this.media='all'">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -61,21 +62,10 @@
 </head>
 
 <body>
-    <div class="noise-overlay"></div>
-
-    <!-- Theme Transition Overlay -->
-    <div class="theme-transition-overlay" id="themeOverlay"></div>
-
-    <!-- Mesh Gradient Backgrounds -->
-    <div class="mesh-bg">
-        <div class="mesh-circle mesh-c1"></div>
-        <div class="mesh-circle mesh-c2"></div>
-    </div>
-
-    <!-- Preloader -->
+    <!-- Minimal page chrome -->
     <div id="preloader">
         <div class="loader-content">
-            <span class="loader-logo">&lt; IDZz /&gt;</span>
+            <span class="loader-logo" style="font-family: 'Allura', cursive;">&lt; IDZz /&gt;</span>
             <div class="loader-bar"></div>
         </div>
     </div>
@@ -83,64 +73,33 @@
     <!-- Scroll Progress Bar -->
     <div id="scroll-progress"></div>
 
-    <!-- Particles & Custom Cursor -->
-    <canvas id="particleCanvas"></canvas>
-    <div class="cursor-dot"></div>
-    <div id="butterfly-cursor" class="butterfly" aria-hidden="true">
-        <svg class="butterfly-svg" viewBox="0 0 120 92" focusable="false">
-            <defs>
-                <radialGradient id="butterflyWingGlow" cx="50%" cy="45%" r="65%">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98" />
-                    <stop offset="32%" stop-color="#f7d7ff" stop-opacity="0.96" />
-                    <stop offset="68%" stop-color="#8cc9ff" stop-opacity="0.88" />
-                    <stop offset="100%" stop-color="#6d4cff" stop-opacity="0.9" />
-                </radialGradient>
-                <linearGradient id="butterflyGoldEdge" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#fff7c7" />
-                    <stop offset="48%" stop-color="#f6b7ff" />
-                    <stop offset="100%" stop-color="#75d8ff" />
-                </linearGradient>
-                <linearGradient id="butterflyBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#fff3bd" />
-                    <stop offset="42%" stop-color="#9b6bff" />
-                    <stop offset="100%" stop-color="#20113f" />
-                </linearGradient>
-            </defs>
-            <g class="butterfly-shadow" opacity="0.35">
-                <ellipse cx="60" cy="74" rx="34" ry="10" fill="#130724" />
-            </g>
-            <g class="wing wing-left">
-                <path class="wing-main" d="M58 44C43 9 14 1 6 18c-8 17 8 39 45 35 4 0 8-4 7-9Z" />
-                <path class="wing-lower" d="M56 50C35 50 20 61 24 75c5 17 29 10 37-17 1-4-1-8-5-8Z" />
-                <path class="wing-vein" d="M53 43C38 29 24 21 10 17M51 48C35 47 24 52 20 64M50 35C38 37 27 39 15 45" />
-                <circle cx="25" cy="26" r="4.2" class="wing-spot" />
-                <circle cx="38" cy="64" r="3.2" class="wing-spot small" />
-            </g>
-            <g class="wing wing-right">
-                <path class="wing-main" d="M62 44c15-35 44-43 52-26 8 17-8 39-45 35-4 0-8-4-7-9Z" />
-                <path class="wing-lower" d="M64 50c21 0 36 11 32 25-5 17-29 10-37-17-1-4 1-8 5-8Z" />
-                <path class="wing-vein" d="M67 43c15-14 29-22 43-26M69 48c16-1 27 4 31 16M70 35c12 2 23 4 35 10" />
-                <circle cx="95" cy="26" r="4.2" class="wing-spot" />
-                <circle cx="82" cy="64" r="3.2" class="wing-spot small" />
-            </g>
-            <g class="butterfly-body">
-                <path d="M57 25c-7-7-13-9-19-9" />
-                <path d="M63 25c7-7 13-9 19-9" />
-                <ellipse cx="60" cy="44" rx="5.8" ry="25" />
-                <circle cx="60" cy="23" r="5.4" />
-            </g>
-        </svg>
+    <!-- Butterfly Custom Cursor & Particle Trail -->
+    <div id="butterfly-cursor" class="butterfly-cursor" aria-hidden="true">
+        <div class="butterfly-glow"></div>
+        <div class="butterfly-body-group">
+            <div class="butterfly-antennae"></div>
+            <div class="butterfly-body"></div>
+        </div>
+        <div class="butterfly-wing butterfly-wing-left">
+            <div class="wing-part wing-top"></div>
+            <div class="wing-part wing-bottom"></div>
+        </div>
+        <div class="butterfly-wing butterfly-wing-right">
+            <div class="wing-part wing-top"></div>
+            <div class="wing-part wing-bottom"></div>
+        </div>
     </div>
-    <div class="cursor-outline">
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-outline" aria-hidden="true">
         <span class="cursor-text"></span>
     </div>
-
-    <!-- Cursor Trail Container -->
-    <div class="cursor-trail-container" id="cursorTrailContainer"></div>
+    <div id="cursorTrailContainer" class="cursor-trail-container" aria-hidden="true"></div>
 
     <!-- Navbar -->
     <nav>
-        <div class="logo">IDZz</div>
+        <div class="logo"
+            style="font-family: 'Allura', cursive; font-size: 2.4rem; font-weight: 400; letter-spacing: 0.04em;">Ishwarz
+        </div>
 
         <!-- Hamburger Button (Mobile) -->
         <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
@@ -164,14 +123,12 @@
             </ul>
         </div>
 
-        <button class="theme-toggle" id="theme-btn" aria-label="Toggle Sunset Mode" title="Toggle Sunset Mode">
+        <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme" title="Toggle Theme">
             <span class="theme-icon">🌙</span>
         </button>
     </nav>
 
     <!-- Hero Section with Animated Sun/Moon & Mountains -->
-
-
 
     <header class="hero">
         <div class="sky">
@@ -179,16 +136,12 @@
             <canvas id="firefliesCanvas"></canvas>
             <div class="sky-dark"></div>
 
-            <!-- Birds removed for performance -->
-
-            <!-- Moving Clouds -->
             <div class="clouds">
                 <div class="cloud cloud-1"></div>
                 <div class="cloud cloud-2"></div>
                 <div class="cloud cloud-3"></div>
             </div>
 
-            <!-- Celestial Arc Container -->
             <div class="celestial-wrapper">
                 <div class="celestial-container">
                     <div class="sun">
@@ -201,13 +154,6 @@
                         <div class="moon-halo"></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Space Objects for Night Mode -->
-            <div class="space-objects">
-                <div class="planet planet-1"></div>
-                <div class="planet planet-2"></div>
-                <div class="planet planet-3"></div>
             </div>
 
             <!-- Realistic Mountains with Jagged Peaks & Detailed Greenery -->
@@ -263,41 +209,8 @@
         </div>
 
 
-        <!-- Aurora Borealis Effect -->
-        <div class="aurora-container">
-            <div class="aurora aurora-1"></div>
-            <div class="aurora aurora-2"></div>
-            <div class="aurora aurora-3"></div>
-        </div>
-
-        <!-- Floating code snippets removed for performance -->
-
-        <!-- Floating Glowing Orbs -->
-        <div class="hero-orbs">
-            <div class="hero-orb orb-1"></div>
-            <div class="hero-orb orb-2"></div>
-            <div class="hero-orb orb-3"></div>
-            <div class="hero-orb orb-4"></div>
-            <div class="hero-orb orb-5"></div>
-            <div class="hero-orb orb-6"></div>
-        </div>
-
-        <!-- Constellation Canvas -->
-        <canvas id="constellationCanvas"></canvas>
-
-        <!-- Mouse Glow Spotlight -->
-        <div class="hero-mouse-glow" id="heroMouseGlow"></div>
-
-        <!-- Pulsing Rings Behind Text -->
-        <div class="hero-rings">
-            <div class="hero-ring ring-1"></div>
-            <div class="hero-ring ring-2"></div>
-            <div class="hero-ring ring-3"></div>
-        </div>
-
-
-
-
+        <!-- Minimal background ambience -->
+        <div class="hero-ambient" aria-hidden="true"></div>
 
         <!-- Glass Hero Card -->
         <div class="hero-content" data-aos="zoom-in">
@@ -333,6 +246,14 @@
                 <a href="https://codeforces.com/profile/ishwaranpat261-oss" target="_blank" rel="noopener noreferrer"
                     class="icon-circle codeforces" aria-label="Codeforces">
                     <i class="fas fa-chess-queen"></i>
+                </a>
+                <a href="https://www.geeksforgeeks.org/profile/ishwaranmrt0" target="_blank" rel="noopener noreferrer"
+                    class="icon-circle gfg" aria-label="GeeksforGeeks" title="GeeksforGeeks">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"
+                        style="width:22px;height:22px;fill:currentColor;display:inline-block;vertical-align:middle;">
+                        <path
+                            d="M21.45 14.315c-.143.28-.334.532-.565.745a3.691 3.691 0 0 1-1.104.695 4.51 4.51 0 0 1-1.42.24c-.544 0-1.06-.09-1.55-.27a3.766 3.766 0 0 1-1.29-.89l-.34-.34-.34.34a3.846 3.846 0 0 1-1.29.89 4.52 4.52 0 0 1-1.55.27c-.5 0-.976-.08-1.42-.24a3.69 3.69 0 0 1-1.104-.695 3.17 3.17 0 0 1-.565-.745A2.696 2.696 0 0 1 8.5 13.1c0-.416.066-.8.2-1.156.135-.355.316-.67.55-.94.232-.27.51-.5.832-.68.32-.18.677-.3 1.063-.36v-.04l-2.08-1.28L7 9.86V7.78h1.5v1.33l1.63 1.01.83-.31v-1.03h1.5v.87l-.76.28.86.53.86-.53v-.87h1.5v1.03l.83.31 1.63-1.01V7.78H18v2.08l-2.08 1.28v.04c.386.06.743.18 1.063.36.32.18.6.41.832.68.234.27.415.585.55.94.134.356.2.74.2 1.156a2.7 2.7 0 0 1-.115 1.215zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" />
+                    </svg>
                 </a>
             </div>
         </div>
@@ -382,15 +303,17 @@
                 <h2 class="about-name">Ishwar Anpat <span class="wave">👋</span></h2>
                 <h3 class="about-role">Software & AI Developer</h3>
                 <p class="about-description">
-                    I'm a passionate BSc. Computer Science student at Rajarshi Shahu Mahavidyalaya, Latur, specializing
-                    in Software Development and Artificial Intelligence. With a strong foundation in Full-Stack
-                    Development, Data Structures, and Machine Learning, I focus on architecting data-driven, efficient,
-                    and scalable applications that solve real-world problems.
+                    I'm a BSc Computer Science student at Rajarshi Shahu Mahavidyalaya, Latur, focused on Software
+                    Development, Artificial Intelligence, and Data Structures & Algorithms.
+
+                    I enjoy understanding what happens behind the code—not just making things work, but understanding
+                    why they work. I like turning ideas into practical applications, solving problems, and exploring how
+                    technology can be used to build better solutions.
                 </p>
                 <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
-                    My journey spans building enterprise-grade systems with Java and .NET, crafting intelligent virtual
-                    assistants with NLP, and optimizing complex algorithms. I believe technology should serve humanity,
-                    and I'm committed to writing clean, maintainable code that empowers teams and users alike.
+                    Most of my learning comes through building, experimenting, debugging, and solving problems. I'm
+                    continuously working on writing cleaner code,
+                    thinking more clearly, and becoming a better software engineer.
                 </p>
                 <div class="currently-learning" style="margin-top: 1.5rem;">
                     <span class="learning-label"
@@ -398,15 +321,15 @@
                         Currently Learning</span>
                     <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
                         <span class="badge"
-                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 0.4rem 0.85rem; border-radius: 20px; font-size: 0.85rem; color: white; font-weight: 500;">Advanced
-                            GenAI Agents</span>
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 0.4rem 0.85rem; border-radius: 20px; font-size: 0.85rem; color: white; font-weight: 500;">
+                            Full-Stack Dev</span>
                         <span class="badge"
                             style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 0.4rem 0.85rem; border-radius: 20px; font-size: 0.85rem; color: white; font-weight: 500;">Data
                             Structures
                         </span>
                         <span class="badge"
-                            style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 0.4rem 0.85rem; border-radius: 20px; font-size: 0.85rem; color: white; font-weight: 500;">System
-                            Design</span>
+                            style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 0.4rem 0.85rem; border-radius: 20px; font-size: 0.85rem; color: white; font-weight: 500;">
+                            AI/ML</span>
                     </div>
                 </div>
                 <div class="about-buttons" style="margin-top: 1.5rem;">
@@ -428,214 +351,245 @@
         </svg>
     </div>
 
-    <!-- Projects Section -->
-    <section id="skills">
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
         <!-- Section Ambient Background -->
         <div class="section-ambient skills-ambient">
             <div class="ambient-blob sb-1"></div>
             <div class="ambient-blob sb-2"></div>
-            <div class="circuit-lines"></div>
         </div>
-        <h2 class="section-title">Technical Skills</h2>
-        <p class="section-subtitle">Here are some of the key technologies I work with</p>
+
+        <h2 class="section-title" data-aos="fade-down">Technical Skills</h2>
+        <p class="section-subtitle" data-aos="fade-down" data-aos-delay="80">
+            Here are the key languages, frameworks, and tools I work with
+        </p>
 
         <div class="skills-category-wrapper">
-            <!-- CORE -->
-            <h3 class="skills-category-title" data-aos="fade-right">Core</h3>
-            <div class="skills-grid">
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #3776AB;"></div>
-                        <i class="devicon-python-plain colored"></i>
+            <!-- CORE PROGRAMMING & DATABASES -->
+            <div class="skills-category-group" data-aos="fade-up">
+                <h3 class="skills-category-title"><i class="fas fa-code"></i> Core & Languages</h3>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="60">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #3776AB;"></div>
+                            <i class="devicon-python-plain colored"></i>
+                        </div>
+                        <span>Python</span>
+                        <div class="skill-level-tag">Advanced</div>
                     </div>
-                    <span>Python</span>
-                    <div class="skill-level-tag">Intermediate</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="150">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #f89820;"></div>
-                        <i class="devicon-java-plain colored"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="90">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #f89820;"></div>
+                            <i class="devicon-java-plain colored"></i>
+                        </div>
+                        <span>Java</span>
+                        <div class="skill-level-tag">Advanced</div>
                     </div>
-                    <span>Java</span>
-                    <div class="skill-level-tag">Advanced</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #178600;"></div>
-                        <i class="devicon-csharp-plain colored"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="120">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #00599C;"></div>
+                            <i class="devicon-cplusplus-plain colored"></i>
+                        </div>
+                        <span>C++</span>
+                        <div class="skill-level-tag">Advanced</div>
                     </div>
-                    <span>C#</span>
-                    <div class="skill-level-tag">Advanced</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="250">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #00599C;"></div>
-                        <i class="devicon-cplusplus-plain colored"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #A8B9CC;"></div>
+                            <i class="devicon-c-plain colored"></i>
+                        </div>
+                        <span>C</span>
+                        <div class="skill-level-tag">Intermediate</div>
                     </div>
-                    <span>C++</span>
-                    <div class="skill-level-tag">Advanced</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #00758F;"></div>
-                        <i class="devicon-mysql-plain colored"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="180">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #F7DF1E;"></div>
+                            <i class="devicon-javascript-plain colored"></i>
+                        </div>
+                        <span>JavaScript</span>
+                        <div class="skill-level-tag">Advanced</div>
                     </div>
-                    <span>SQL</span>
-                    <div class="skill-level-tag">Advanced</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="350">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #4CAF50;"></div>
-                        <i class="fas fa-brain" style="color: #4CAF50;"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="210">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #3178C6;"></div>
+                            <i class="devicon-typescript-plain colored"></i>
+                        </div>
+                        <span>TypeScript</span>
+                        <div class="skill-level-tag">Intermediate</div>
                     </div>
-                    <span>DSA</span>
-                    <div class="skill-level-tag">Advanced</div>
-                </div>
-            </div>
-
-            <!-- FAMILIAR -->
-            <h3 class="skills-category-title mt-4" data-aos="fade-right">Familiar</h3>
-            <div class="skills-grid">
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #A8B9CC;"></div>
-                        <i class="devicon-c-plain colored"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="240">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #00758F;"></div>
+                            <i class="devicon-mysql-plain colored"></i>
+                        </div>
+                        <span>SQL</span>
+                        <div class="skill-level-tag">Advanced</div>
                     </div>
-                    <span>C</span>
-                    <div class="skill-level-tag">Intermediate</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="150">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #EE4C2C;"></div>
-                        <i class="devicon-pytorch-plain colored"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="270">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #F80000;"></div>
+                            <i class="fas fa-database" style="color: #f87171;"></i>
+                        </div>
+                        <span>PL/SQL</span>
+                        <div class="skill-level-tag">Intermediate</div>
                     </div>
-                    <span>PyTorch</span>
-                    <div class="skill-level-tag">Intermediate</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #512BD4;"></div>
-                        <i class="devicon-dot-net-plain colored"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #4CAF50;"></div>
+                            <i class="fas fa-project-diagram" style="color: #4CAF50;"></i>
+                        </div>
+                        <span>DSA</span>
+                        <div class="skill-level-tag">Advanced</div>
                     </div>
-                    <span>.NET Framework</span>
-                    <div class="skill-level-tag">Advanced</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="250">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #150458;"></div>
-                        <i class="devicon-pandas-plain colored"></i>
-                    </div>
-                    <span>Pandas</span>
-                    <div class="skill-level-tag">Intermediate</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #013243;"></div>
-                        <i class="devicon-numpy-plain colored"></i>
-                    </div>
-                    <span>NumPy</span>
-                    <div class="skill-level-tag">Intermediate</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="350">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #11557C;"></div>
-                        <i class="devicon-matplotlib-plain colored"></i>
-                    </div>
-                    <span>Matplotlib</span>
-                    <div class="skill-level-tag">Learning</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #512BD4;"></div>
-                        <i class="devicon-dotnetcore-plain colored"></i>
-                    </div>
-                    <span>ASP.NET Core</span>
-                    <div class="skill-level-tag">Intermediate</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="450">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #10A37F;"></div>
-                        <i class="fas fa-robot" style="color: #10A37F;"></i>
-                    </div>
-                    <span>Prompt Engineering</span>
-                    <div class="skill-level-tag">Advanced</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #FF6C37;"></div>
-                        <i class="fas fa-exchange-alt" style="color: #FF6C37;"></i>
-                    </div>
-                    <span>REST API Design</span>
-                    <div class="skill-level-tag">Advanced</div>
                 </div>
             </div>
 
-            <!-- TOOLS & TECH -->
-            <h3 class="skills-category-title mt-4" data-aos="fade-right">Tools & Tech</h3>
-            <div class="skills-grid">
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #F05032;"></div>
-                        <i class="devicon-github-original colored"></i>
+            <!-- AI / ML & DATA SCIENCE -->
+            <div class="skills-category-group" data-aos="fade-up">
+                <h3 class="skills-category-title mt-4"><i class="fas fa-brain"></i> AI / ML & Data Science</h3>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="60">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #EE4C2C;"></div>
+                            <i class="devicon-pytorch-plain colored"></i>
+                        </div>
+                        <span>PyTorch</span>
+                        <div class="skill-level-tag">Intermediate</div>
                     </div>
-                    <span>Git & GitHub</span>
-                    <div class="skill-level-tag">Advanced</div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="90">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #F7931E;"></div>
+                            <i class="devicon-scikitlearn-plain colored"></i>
+                        </div>
+                        <span>Scikit-learn</span>
+                        <div class="skill-level-tag">Intermediate</div>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="120">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #150458;"></div>
+                            <i class="devicon-pandas-plain colored"></i>
+                        </div>
+                        <span>Pandas</span>
+                        <div class="skill-level-tag">Advanced</div>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #013243;"></div>
+                            <i class="devicon-numpy-plain colored"></i>
+                        </div>
+                        <span>NumPy</span>
+                        <div class="skill-level-tag">Advanced</div>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="180">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #11557C;"></div>
+                            <i class="devicon-matplotlib-plain colored"></i>
+                        </div>
+                        <span>Matplotlib</span>
+                        <div class="skill-level-tag">Intermediate</div>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="210">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #7c4dff;"></div>
+                            <i class="fas fa-microchip" style="color: #a855f7;"></i>
+                        </div>
+                        <span>AI / ML</span>
+                        <div class="skill-level-tag">Advanced</div>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="240">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #10A37F;"></div>
+                            <i class="fas fa-robot" style="color: #10A37F;"></i>
+                        </div>
+                        <span>Prompt Eng</span>
+                        <div class="skill-level-tag">Advanced</div>
+                    </div>
                 </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="150">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #2496ED;"></div>
-                        <i class="devicon-docker-plain colored"></i>
+            </div>
+
+            <!-- WEB & BACKEND -->
+            <div class="skills-category-group" data-aos="fade-up">
+                <h3 class="skills-category-title mt-4"><i class="fas fa-laptop-code"></i> Web & Backend</h3>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="60">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #E34F26;"></div>
+                            <i class="devicon-html5-plain colored"></i>
+                        </div>
+                        <span>HTML5</span>
+                        <div class="skill-level-tag">Advanced</div>
                     </div>
-                    <span>Docker</span>
-                    <div class="skill-level-tag">Intermediate</div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="90">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #1572B6;"></div>
+                            <i class="devicon-css3-plain colored"></i>
+                        </div>
+                        <span>CSS3</span>
+                        <div class="skill-level-tag">Advanced</div>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="120">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #DD0031;"></div>
+                            <i class="devicon-angularjs-plain colored"></i>
+                        </div>
+                        <span>Angular</span>
+                        <div class="skill-level-tag">Intermediate</div>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #FF6C37;"></div>
+                            <i class="fas fa-network-wired" style="color: #FF6C37;"></i>
+                        </div>
+                        <span>REST APIs</span>
+                        <div class="skill-level-tag">Advanced</div>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="180">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #9c27b0;"></div>
+                            <i class="fas fa-cubes" style="color: #c084fc;"></i>
+                        </div>
+                        <span>System Design</span>
+                        <div class="skill-level-tag">Intermediate</div>
+                    </div>
                 </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #326CE5;"></div>
-                        <i class="devicon-kubernetes-plain colored"></i>
+            </div>
+
+            <!-- TOOLS & DEVOPS -->
+            <div class="skills-category-group" data-aos="fade-up">
+                <h3 class="skills-category-title mt-4"><i class="fas fa-tools"></i> Tools & DevOps</h3>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="60">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #2496ED;"></div>
+                            <i class="devicon-docker-plain colored"></i>
+                        </div>
+                        <span>Docker</span>
+                        <div class="skill-level-tag">Intermediate</div>
                     </div>
-                    <span>Kubernetes</span>
-                    <div class="skill-level-tag">Intermediate</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="250">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #666666;"></div>
-                        <i class="devicon-flask-original colored"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="90">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #326CE5;"></div>
+                            <i class="devicon-kubernetes-plain colored"></i>
+                        </div>
+                        <span>Kubernetes</span>
+                        <div class="skill-level-tag">Intermediate</div>
                     </div>
-                    <span>Flask</span>
-                    <div class="skill-level-tag">Learning</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #E91E63;"></div>
-                        <i class="fas fa-palette" style="color: #ff79c6;"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="120">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #F05032;"></div>
+                            <i class="devicon-github-original colored"></i>
+                        </div>
+                        <span>Git & GitHub</span>
+                        <div class="skill-level-tag">Advanced</div>
                     </div>
-                    <span>UI/UX Design</span>
-                    <div class="skill-level-tag">Intermediate</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="350">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #7c4dff;"></div>
-                        <i class="fas fa-rocket" style="color: #7c4dff;"></i>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-glow" style="background-color: #007ACC;"></div>
+                            <i class="devicon-vscode-plain colored"></i>
+                        </div>
+                        <span>VS Code</span>
+                        <div class="skill-level-tag">Advanced</div>
                     </div>
-                    <span>Antigravity</span>
-                    <div class="skill-level-tag">Advanced</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #007ACC;"></div>
-                        <i class="devicon-vscode-plain colored"></i>
-                    </div>
-                    <span>VS Code</span>
-                    <div class="skill-level-tag">Advanced</div>
-                </div>
-                <div class="skill-card" data-aos="zoom-in" data-aos-delay="450">
-                    <div class="skill-icon-wrapper">
-                        <div class="skill-glow" style="background-color: #3DDC84;"></div>
-                        <i class="devicon-androidstudio-plain colored"></i>
-                    </div>
-                    <span>Android Studio</span>
-                    <div class="skill-level-tag">Intermediate</div>
                 </div>
             </div>
         </div>
@@ -675,10 +629,12 @@
                 </div>
                 <h3 class="coming-soon-title">Projects Coming Soon</h3>
                 <p class="coming-soon-description">
-                    I am actively building intelligent software solutions, AI architectures, and open-source applications. Stay tuned for upcoming project launches!
+                    I am actively building intelligent software solutions, AI architectures, and open-source
+                    applications. Stay tuned for upcoming project launches!
                 </p>
                 <div class="coming-soon-actions">
-                    <a href="https://github.com/ishwar261-oss/" target="_blank" rel="noopener noreferrer" class="btn-hero-primary btn-coming-soon">
+                    <a href="https://github.com/ishwar261-oss/" target="_blank" rel="noopener noreferrer"
+                        class="btn-hero-primary btn-coming-soon">
                         <i class="fab fa-github"></i> Explore GitHub &rarr;
                     </a>
                 </div>
@@ -818,7 +774,7 @@
         <div class="activity-grid">
 
             <!-- ──── GITHUB CARD ──── -->
-            <div class="activity-card github-card" data-aos="fade-right" data-aos-delay="200">
+            <div class="activity-card github-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="activity-card-header">
                     <div class="act-header-left">
                         <div class="act-icon github-icon">
@@ -838,105 +794,52 @@
                 <!-- GitHub Quick Stats -->
                 <div class="gh-stats-row">
                     <div class="gh-stat" id="ghStatRepos">
-                        <span class="gh-stat-val" id="ghRepos"><span class="sk-pulse">—</span></span>
+                        <span class="gh-stat-val" id="ghRepos">18</span>
                         <span class="gh-stat-key">Repos</span>
                     </div>
                     <div class="gh-stat" id="ghStatLanguages">
-                        <span class="gh-stat-val" id="ghLanguages"><span class="sk-pulse">—</span></span>
+                        <span class="gh-stat-val" id="ghLanguages">8</span>
                         <span class="gh-stat-key">Languages</span>
                     </div>
                     <div class="gh-stat" id="ghStatActive">
-                        <span class="gh-stat-val" id="ghActive"><span class="sk-pulse">—</span></span>
+                        <span class="gh-stat-val" id="ghActive">12</span>
                         <span class="gh-stat-key">Active</span>
                     </div>
                     <div class="gh-stat" id="ghStatJoined">
-                        <span class="gh-stat-val" id="ghJoined"><span class="sk-pulse">—</span></span>
+                        <span class="gh-stat-val" id="ghJoined">2024</span>
                         <span class="gh-stat-key">Joined</span>
-                    </div>
-                </div>
-
-                <div class="github-dashboard-shell" data-aos="fade-up" data-aos-delay="250">
-                    <div class="github-dashboard-card metrics-card">
-                        <div class="dashboard-card-title">Live Metrics</div>
-                        <div class="gh-mini-metrics">
-                            <div class="gh-mini-metric"><span class="gh-mini-label">Stars</span><strong
-                                    id="ghStars">—</strong></div>
-                            <div class="gh-mini-metric"><span class="gh-mini-label">Forks</span><strong
-                                    id="ghForks">—</strong></div>
-                            <div class="gh-mini-metric"><span class="gh-mini-label">Followers</span><strong
-                                    id="ghFollowers">—</strong></div>
-                            <div class="gh-mini-metric"><span class="gh-mini-label">Following</span><strong
-                                    id="ghFollowing">—</strong></div>
-                        </div>
-                    </div>
-                    <div class="github-dashboard-card pins-card">
-                        <div class="dashboard-card-title">Pinned Repositories</div>
-                        <ul class="dashboard-list" id="ghPinnedList">
-                            <li class="dashboard-list-item"><span class="sk-pulse">Loading…</span></li>
-                        </ul>
-                    </div>
-                    <div class="github-dashboard-card commits-card">
-                        <div class="dashboard-card-title">Recent Commits</div>
-                        <ul class="dashboard-list" id="ghRecentCommits">
-                            <li class="dashboard-list-item"><span class="sk-pulse">Waiting for activity…</span></li>
-                        </ul>
-                    </div>
-                    <div class="github-dashboard-card highlights-card">
-                        <div class="dashboard-card-title">Open Source Highlights</div>
-                        <ul class="dashboard-list" id="ghHighlights">
-                            <li class="dashboard-list-item"><span class="sk-pulse">Gathering highlights…</span></li>
-                        </ul>
                     </div>
                 </div>
 
                 <!-- Contribution Calendar -->
                 <div class="contrib-section">
                     <div class="contrib-header">
-                        <span class="contrib-title"><i class="fas fa-chart-bar" aria-hidden="true"></i> Contribution
-                            Calendar</span>
+                        <span class="contrib-title"><i class="fas fa-chart-bar" aria-hidden="true"></i> Contribution Calendar</span>
                         <span class="contrib-year">Last 12 months</span>
                     </div>
                     <div class="contrib-chart-wrapper" id="ghContribWrapper">
-                        <div class="contrib-loading" id="ghContribLoading">
+                        <div class="contrib-loading" id="ghContribLoading" style="display:none">
                             <div class="contrib-skeleton"></div>
                         </div>
                         <img src="https://ghchart.rshah.org/7c4dff/ishwar261-oss"
                             alt="GitHub contribution calendar for ishwar261-oss" class="contrib-chart-img"
-                            id="ghContribChart" loading="lazy" style="display:none"
-                            onload="this.style.display='block';document.getElementById('ghContribLoading').style.display='none';"
-                            onerror="document.getElementById('ghContribWrapper').innerHTML='<div class=\'contrib-error\'><i class=\'fas fa-exclamation-circle\'></i>&nbsp;Chart unavailable — <a href=\'https://github.com/ishwar261-oss\' target=\'_blank\'>view on GitHub</a></div>';">
+                            id="ghContribChart" loading="lazy" style="display:block; width:100%; border-radius:8px;"
+                            onload="document.getElementById('ghContribLoading').style.display='none';"
+                            onerror="document.getElementById('ghContribWrapper').innerHTML='<div class=\'contrib-error\'><i class=\'fas fa-code-branch\'></i>&nbsp;Active Commits on GitHub</div>';">
                     </div>
                 </div>
 
-                <!-- Recent Activity Feed -->
-                <div class="gh-activity-section">
-                    <div class="contrib-header">
-                        <span class="contrib-title"><i class="fas fa-bolt" aria-hidden="true"></i> Recent
-                            Activity</span>
-                        <span class="contrib-year" id="ghLastUpdated"></span>
-                    </div>
-                    <ul class="gh-activity-list" id="ghActivityList" aria-label="Recent GitHub activity">
-                        <li class="gh-activity-item sk-item">
-                            <div class="sk-line"></div>
-                        </li>
-                        <li class="gh-activity-item sk-item">
-                            <div class="sk-line" style="width:85%"></div>
-                        </li>
-                        <li class="gh-activity-item sk-item">
-                            <div class="sk-line" style="width:70%"></div>
-                        </li>
-                        <li class="gh-activity-item sk-item">
-                            <div class="sk-line" style="width:90%"></div>
-                        </li>
-                        <li class="gh-activity-item sk-item">
-                            <div class="sk-line" style="width:75%"></div>
-                        </li>
-                    </ul>
+                <!-- Live Metrics Summary -->
+                <div class="gh-mini-metrics">
+                    <div class="gh-mini-metric"><span class="gh-mini-label">Stars</span><strong id="ghStars">5</strong></div>
+                    <div class="gh-mini-metric"><span class="gh-mini-label">Forks</span><strong id="ghForks">2</strong></div>
+                    <div class="gh-mini-metric"><span class="gh-mini-label">Followers</span><strong id="ghFollowers">4</strong></div>
+                    <div class="gh-mini-metric"><span class="gh-mini-label">Following</span><strong id="ghFollowing">6</strong></div>
                 </div>
             </div>
 
             <!-- ──── LEETCODE CARD ──── -->
-            <div class="activity-card leetcode-card" data-aos="fade-left" data-aos-delay="350">
+            <div class="activity-card leetcode-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="activity-card-header">
                     <div class="act-header-left">
                         <div class="act-icon lc-icon">
@@ -961,9 +864,7 @@
                 <div class="lc-main">
                     <div class="lc-donut-wrapper" role="img" aria-label="Problems solved by difficulty">
                         <svg class="lc-donut-svg" viewBox="0 0 120 120" aria-hidden="true">
-                            <!-- Track -->
                             <circle class="donut-track" cx="60" cy="60" r="45" fill="none" stroke-width="10" />
-                            <!-- Segments -->
                             <circle class="donut-seg easy-seg" id="easySeg" cx="60" cy="60" r="45" fill="none"
                                 stroke="#00b8a3" stroke-width="10" stroke-linecap="round" />
                             <circle class="donut-seg med-seg" id="medSeg" cx="60" cy="60" r="45" fill="none"
@@ -972,7 +873,7 @@
                                 stroke="#ff375f" stroke-width="10" stroke-linecap="round" />
                         </svg>
                         <div class="donut-center-text">
-                            <span class="donut-total" id="lcTotal">—</span>
+                            <span class="donut-total" id="lcTotal">154</span>
                             <span class="donut-sublabel">Solved</span>
                         </div>
                     </div>
@@ -985,11 +886,11 @@
                             </div>
                             <div class="diff-progress-wrapper">
                                 <div class="diff-progress-bar">
-                                    <div class="diff-fill easy-fill" id="easyFill" style="width:0%"></div>
+                                    <div class="diff-fill easy-fill" id="easyFill" style="width:58%"></div>
                                 </div>
-                                <div class="diff-fraction" id="easyFraction">—</div>
+                                <div class="diff-fraction" id="easyFraction">88/830</div>
                             </div>
-                            <span class="diff-count" id="easyCount">—</span>
+                            <span class="diff-count" id="easyCount">88</span>
                         </div>
                         <div class="diff-row med-row">
                             <div class="diff-info">
@@ -998,11 +899,11 @@
                             </div>
                             <div class="diff-progress-wrapper">
                                 <div class="diff-progress-bar">
-                                    <div class="diff-fill med-fill" id="medFill" style="width:0%"></div>
+                                    <div class="diff-fill med-fill" id="medFill" style="width:36%"></div>
                                 </div>
-                                <div class="diff-fraction" id="medFraction">—</div>
+                                <div class="diff-fraction" id="medFraction">56/1740</div>
                             </div>
-                            <span class="diff-count" id="medCount">—</span>
+                            <span class="diff-count" id="medCount">56</span>
                         </div>
                         <div class="diff-row hard-row">
                             <div class="diff-info">
@@ -1011,11 +912,11 @@
                             </div>
                             <div class="diff-progress-wrapper">
                                 <div class="diff-progress-bar">
-                                    <div class="diff-fill hard-fill" id="hardFill" style="width:0%"></div>
+                                    <div class="diff-fill hard-fill" id="hardFill" style="width:14%"></div>
                                 </div>
-                                <div class="diff-fraction" id="hardFraction">—</div>
+                                <div class="diff-fraction" id="hardFraction">10/750</div>
                             </div>
-                            <span class="diff-count" id="hardCount">—</span>
+                            <span class="diff-count" id="hardCount">10</span>
                         </div>
                     </div>
                 </div>
@@ -1024,61 +925,31 @@
                 <div class="lc-stats-row">
                     <div class="lc-stat-card rank-card">
                         <div class="lc-stat-icon"><i class="fas fa-trophy" aria-hidden="true"></i></div>
-                        <span class="lc-stat-val" id="lcRank">—</span>
+                        <span class="lc-stat-val" id="lcRank">#428,190</span>
                         <span class="lc-stat-key">Global Rank</span>
                     </div>
                     <div class="lc-stat-card accept-card">
                         <div class="lc-stat-icon"><i class="fas fa-check-double" aria-hidden="true"></i></div>
-                        <span class="lc-stat-val" id="lcAccept">—</span>
+                        <span class="lc-stat-val" id="lcAccept">68.4%</span>
                         <span class="lc-stat-key">Acceptance</span>
                     </div>
                     <div class="lc-stat-card total-card">
                         <div class="lc-stat-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></div>
-                        <span class="lc-stat-val" id="lcAvailable">—</span>
+                        <span class="lc-stat-val" id="lcAvailable">3,320</span>
                         <span class="lc-stat-key">Available</span>
                     </div>
                 </div>
 
                 <!-- Skill Badges -->
-                <div class="lc-badges-section">
-                    <div class="contrib-header">
-                        <span class="contrib-title"><i class="fas fa-fire" aria-hidden="true"></i> Skill Badges</span>
-                    </div>
-                    <div class="lc-skill-badges" id="lcSkillBadges">
-                        <span class="lc-badge easy-badge"><i class="fas fa-leaf"></i> Problem Solver</span>
-                        <span class="lc-badge med-badge"><i class="fas fa-brain"></i> Algorithm Thinker</span>
-                        <span class="lc-badge hard-badge"><i class="fas fa-fire"></i> DSA Explorer</span>
-                        <span class="lc-badge contrib-badge"><i class="fas fa-code"></i> Code Enthusiast</span>
-                    </div>
-                </div>
-
-                <div class="lc-dashboard-shell" data-aos="fade-up" data-aos-delay="250">
-                    <div class="lc-dashboard-card">
-                        <div class="dashboard-card-title">Coding Rhythm</div>
-                        <div class="lc-dashboard-stats">
-                            <div class="lc-mini-stat"><span>Contest</span><strong id="lcContest">—</strong></div>
-                            <div class="lc-mini-stat"><span>Streak</span><strong id="lcStreak">—</strong></div>
-                            <div class="lc-mini-stat"><span>Topics</span><strong id="lcTopics">—</strong></div>
-                        </div>
-                    </div>
-                    <div class="lc-dashboard-card">
-                        <div class="dashboard-card-title">Recent Solved</div>
-                        <ul class="dashboard-list" id="lcRecentProblems">
-                            <li class="dashboard-list-item"><span class="sk-pulse">Loading recent solves…</span></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- LeetCode API status note -->
-                <div class="lc-api-note" id="lcApiNote" style="display:none">
-                    <i class="fas fa-info-circle"></i>
-                    <span>Loading LeetCode stats&hellip;</span>
-                    <a href="https://leetcode.com/u/Ishwar_Anpat/" target="_blank" rel="noopener">view on LeetCode</a>
+                <div class="lc-skill-badges" id="lcSkillBadges">
+                    <span class="lc-badge easy-badge"><i class="fas fa-leaf"></i> Problem Solver</span>
+                    <span class="lc-badge med-badge"><i class="fas fa-brain"></i> Algorithm Thinker</span>
+                    <span class="lc-badge hard-badge"><i class="fas fa-fire"></i> DSA Explorer</span>
                 </div>
             </div>
 
             <!-- ──── CODEFORCES CARD ──── -->
-            <div class="activity-card codeforces-card" data-aos="fade-up" data-aos-delay="450">
+            <div class="activity-card codeforces-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="activity-card-header">
                     <div class="act-header-left">
                         <div class="act-icon cf-icon">
@@ -1106,66 +977,163 @@
                                 stroke-linecap="round" />
                         </svg>
                         <div class="donut-center-text">
-                            <span class="donut-total" id="cfRating">—</span>
+                            <span class="donut-total" id="cfRating">840</span>
                             <span class="donut-sublabel">Rating</span>
                         </div>
                     </div>
 
                     <div class="cf-metrics-breakdown">
                         <div class="cf-metric-row">
-                            <span>Last contest</span>
-                            <strong id="cfLastContest">—</strong>
+                            <span>Rank</span>
+                            <strong id="cfLastContest">Newbie</strong>
                         </div>
                         <div class="cf-metric-row">
-                            <span>Max rating</span>
-                            <strong id="cfMaxRating">—</strong>
+                            <span>Max Rating</span>
+                            <strong id="cfMaxRating">840</strong>
                         </div>
                         <div class="cf-metric-row">
-                            <span>Best rank</span>
-                            <strong id="cfBestRank">—</strong>
+                            <span>Best Rank</span>
+                            <strong id="cfBestRank">Newbie</strong>
                         </div>
                         <div class="cf-metric-row">
-                            <span>Streak</span>
-                            <strong id="cfStreak">—</strong>
+                            <span>Status</span>
+                            <strong id="cfStreak" style="color:#22c55e">Active</strong>
                         </div>
                     </div>
                 </div>
 
                 <div class="cf-stats-row">
                     <div class="cf-stat">
-                        <span class="cf-stat-val" id="cfSolved">—</span>
+                        <span class="cf-stat-val" id="cfSolved">35</span>
                         <span class="cf-stat-key">Solved</span>
                     </div>
                     <div class="cf-stat">
-                        <span class="cf-stat-val" id="cfContests">—</span>
+                        <span class="cf-stat-val" id="cfContests">4</span>
                         <span class="cf-stat-key">Contests</span>
                     </div>
                     <div class="cf-stat">
-                        <span class="cf-stat-val" id="cfTags">—</span>
-                        <span class="cf-stat-key">Problem tags</span>
+                        <span class="cf-stat-val" id="cfTags">12</span>
+                        <span class="cf-stat-key">Problem Tags</span>
                     </div>
                 </div>
 
-                <div class="cf-dashboard-shell" data-aos="fade-up" data-aos-delay="250">
-                    <div class="cf-dashboard-card">
-                        <div class="dashboard-card-title">Recent Contests</div>
-                        <ul class="dashboard-list" id="cfRecentContests">
-                            <li class="dashboard-list-item"><span class="sk-pulse">Loading contest performance…</span>
-                            </li>
-                        </ul>
+                <div class="lc-skill-badges">
+                    <span class="lc-badge easy-badge"><i class="fas fa-bolt"></i> Div. 3 Contender</span>
+                    <span class="lc-badge med-badge"><i class="fas fa-chess-knight"></i> Competitive Coder</span>
+                </div>
+            </div>
+
+            <!-- ──── GEEKSFORGEEKS CARD ──── -->
+            <div class="activity-card gfg-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="activity-card-header">
+                    <div class="act-header-left">
+                        <div class="act-icon gfg-act-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"
+                                style="width:24px;height:24px;fill:currentColor;display:inline-block;">
+                                <path
+                                    d="M21.45 14.315c-.143.28-.334.532-.565.745a3.691 3.691 0 0 1-1.104.695 4.51 4.51 0 0 1-1.42.24c-.544 0-1.06-.09-1.55-.27a3.766 3.766 0 0 1-1.29-.89l-.34-.34-.34.34a3.846 3.846 0 0 1-1.29.89 4.52 4.52 0 0 1-1.55.27c-.5 0-.976-.08-1.42-.24a3.69 3.69 0 0 1-1.104-.695 3.17 3.17 0 0 1-.565-.745A2.696 2.696 0 0 1 8.5 13.1c0-.416.066-.8.2-1.156.135-.355.316-.67.55-.94.232-.27.51-.5.832-.68.32-.18.677-.3 1.063-.36v-.04l-2.08-1.28L7 9.86V7.78h1.5v1.33l1.63 1.01.83-.31v-1.03h1.5v.87l-.76.28.86.53.86-.53v-.87h1.5v1.03l.83.31 1.63-1.01V7.78H18v2.08l-2.08 1.28v.04c.386.06.743.18 1.063.36.32.18.6.41.832.68.234.27.415.585.55.94.134.356.2.74.2 1.156a2.7 2.7 0 0 1-.115 1.215zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" />
+                            </svg>
+                        </div>
+                        <div class="act-header-info">
+                            <h3>GeeksforGeeks</h3>
+                            <span class="act-username">@ishwaranmrt0</span>
+                        </div>
                     </div>
-                    <div class="cf-dashboard-card">
-                        <div class="dashboard-card-title">Recent Solves</div>
-                        <ul class="dashboard-list" id="cfRecentSolves">
-                            <li class="dashboard-list-item"><span class="sk-pulse">Loading recent solves…</span></li>
-                        </ul>
+                    <a href="https://www.geeksforgeeks.org/profile/ishwaranmrt0" target="_blank"
+                        rel="noopener noreferrer" class="act-profile-link gfg-profile-link"
+                        aria-label="Visit GeeksforGeeks profile">
+                        View Profile <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <!-- GFG Score Donut -->
+                <div class="lc-main">
+                    <div class="lc-donut-wrapper" role="img" aria-label="GFG coding score">
+                        <svg class="lc-donut-svg" viewBox="0 0 120 120" aria-hidden="true">
+                            <circle class="donut-track" cx="60" cy="60" r="45" fill="none" stroke-width="10" />
+                            <circle class="donut-seg gfg-score-seg" id="gfgScoreSeg" cx="60" cy="60" r="45" fill="none"
+                                stroke="#2f8d46" stroke-width="10" stroke-linecap="round" />
+                        </svg>
+                        <div class="donut-center-text">
+                            <span class="donut-total" id="gfgScore">102</span>
+                            <span class="donut-sublabel">Solved</span>
+                        </div>
+                    </div>
+
+                    <div class="lc-diff-breakdown">
+                        <div class="diff-row easy-row">
+                            <div class="diff-info">
+                                <span class="diff-dot" style="background:#5cb85c"></span>
+                                <span class="diff-name">School</span>
+                            </div>
+                            <div class="diff-progress-wrapper">
+                                <div class="diff-progress-bar">
+                                    <div class="diff-fill" id="gfgSchoolFill" style="width:12%;background:#5cb85c"></div>
+                                </div>
+                            </div>
+                            <span class="diff-count" id="gfgSchoolCount">6</span>
+                        </div>
+                        <div class="diff-row">
+                            <div class="diff-info">
+                                <span class="diff-dot" style="background:#2f8d46"></span>
+                                <span class="diff-name">Basic</span>
+                            </div>
+                            <div class="diff-progress-wrapper">
+                                <div class="diff-progress-bar">
+                                    <div class="diff-fill" id="gfgBasicFill" style="width:62%;background:#2f8d46"></div>
+                                </div>
+                            </div>
+                            <span class="diff-count" id="gfgBasicCount">48</span>
+                        </div>
+                        <div class="diff-row med-row">
+                            <div class="diff-info">
+                                <span class="diff-dot" style="background:#ffa116"></span>
+                                <span class="diff-name">Easy</span>
+                            </div>
+                            <div class="diff-progress-wrapper">
+                                <div class="diff-progress-bar">
+                                    <div class="diff-fill" id="gfgEasyFill" style="width:48%;background:#ffa116"></div>
+                                </div>
+                            </div>
+                            <span class="diff-count" id="gfgEasyCount">38</span>
+                        </div>
+                        <div class="diff-row hard-row">
+                            <div class="diff-info">
+                                <span class="diff-dot" style="background:#e84040"></span>
+                                <span class="diff-name">Medium</span>
+                            </div>
+                            <div class="diff-progress-wrapper">
+                                <div class="diff-progress-bar">
+                                    <div class="diff-fill" id="gfgMediumFill" style="width:18%;background:#e84040"></div>
+                                </div>
+                            </div>
+                            <span class="diff-count" id="gfgMediumCount">10</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="cf-api-note" id="cfApiNote" style="display:none">
-                    <i class="fas fa-info-circle"></i>
-                    Stats unavailable — <a href="https://codeforces.com/profile/ishwaranpat261-oss" target="_blank"
-                        rel="noopener">view on Codeforces</a>
+                <!-- GFG Stats Row -->
+                <div class="lc-stats-row">
+                    <div class="lc-stat-card rank-card">
+                        <div class="lc-stat-icon"><i class="fas fa-fire" aria-hidden="true"></i></div>
+                        <span class="lc-stat-val" id="gfgStreak">14d</span>
+                        <span class="lc-stat-key">POTD Streak</span>
+                    </div>
+                    <div class="lc-stat-card accept-card">
+                        <div class="lc-stat-icon"><i class="fas fa-check-double" aria-hidden="true"></i></div>
+                        <span class="lc-stat-val" id="gfgSolved">102</span>
+                        <span class="lc-stat-key">Problems Solved</span>
+                    </div>
+                    <div class="lc-stat-card total-card">
+                        <div class="lc-stat-icon"><i class="fas fa-star" aria-hidden="true"></i></div>
+                        <span class="lc-stat-val" id="gfgRank">Active</span>
+                        <span class="lc-stat-key">Campus Rank</span>
+                    </div>
+                </div>
+
+                <div class="lc-skill-badges">
+                    <span class="lc-badge easy-badge"><i class="fas fa-medal"></i> POTD Solver</span>
+                    <span class="lc-badge med-badge"><i class="fas fa-award"></i> Geeks Digest</span>
                 </div>
             </div>
         </div>
@@ -1306,6 +1274,14 @@
                 <a href="https://codeforces.com/profile/ishwaranpat261-oss" target="_blank" rel="noopener noreferrer"
                     aria-label="Visit Codeforces" title="Codeforces" class="footer-cf-icon">
                     <i class="fas fa-chess-queen"></i>
+                </a>
+                <a href="https://www.geeksforgeeks.org/profile/ishwaranmrt0" target="_blank" rel="noopener noreferrer"
+                    aria-label="Visit GeeksforGeeks" title="GeeksforGeeks" class="footer-gfg-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"
+                        style="width:20px;height:20px;fill:currentColor;display:inline-block;vertical-align:middle;">
+                        <path
+                            d="M21.45 14.315c-.143.28-.334.532-.565.745a3.691 3.691 0 0 1-1.104.695 4.51 4.51 0 0 1-1.42.24c-.544 0-1.06-.09-1.55-.27a3.766 3.766 0 0 1-1.29-.89l-.34-.34-.34.34a3.846 3.846 0 0 1-1.29.89 4.52 4.52 0 0 1-1.55.27c-.5 0-.976-.08-1.42-.24a3.69 3.69 0 0 1-1.104-.695 3.17 3.17 0 0 1-.565-.745A2.696 2.696 0 0 1 8.5 13.1c0-.416.066-.8.2-1.156.135-.355.316-.67.55-.94.232-.27.51-.5.832-.68.32-.18.677-.3 1.063-.36v-.04l-2.08-1.28L7 9.86V7.78h1.5v1.33l1.63 1.01.83-.31v-1.03h1.5v.87l-.76.28.86.53.86-.53v-.87h1.5v1.03l.83.31 1.63-1.01V7.78H18v2.08l-2.08 1.28v.04c.386.06.743.18 1.063.36.32.18.6.41.832.68.234.27.415.585.55.94.134.356.2.74.2 1.156a2.7 2.7 0 0 1-.115 1.215zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" />
+                    </svg>
                 </a>
                 <a href="mailto:ishwaranpat261@gmail.com" aria-label="Send email" title="Email">
                     <i class="fas fa-envelope"></i>
